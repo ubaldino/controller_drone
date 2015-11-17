@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+º#!/usr/bin/env python
 #
 # Copyright 2009 Facebook
 #
@@ -74,7 +74,7 @@ global_message_buffer = MessageBuffer()
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html", messages=global_message_buffer.cache)
+        self.render( "index.html" , messages=global_message_buffer.cache )
 
 
 class MessageNewHandler(tornado.web.RequestHandler):
