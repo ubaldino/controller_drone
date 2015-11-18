@@ -1,4 +1,4 @@
-º#!/usr/bin/env python
+#!/usr/bin/env python
 #
 # Copyright 2009 Facebook
 #

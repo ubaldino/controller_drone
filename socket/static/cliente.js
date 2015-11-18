@@ -11,8 +11,29 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 // License for the specific language governing permissions and limitations
 // under the License.
+var seekbar = new Seekbar.Seekbar({
+    renderTo: "#seekbar-container",
+    minValue: 0,
+    maxValue: 100,
+    barSize: 4,
+    needleSize: 0.8,
+    valueListener: function (value) {
+        valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
+        this.setValue( value );
+        document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
+        console.log( valor_vel );
+    },
+    value: 0
+});
+
 
 $(document).ready(function() {
+
+
+
+
+
+
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
 
@@ -28,10 +49,35 @@ $(document).ready(function() {
     });
     $("#message").select();
     updater.poll();
+
+
+    $("#slider").slider({
+        min: 0,
+        max: 100,
+        step: 1,
+        change: showValue
+    });
+
+    $( "#slider" ).bind( 'change' , function(){
+        window.test = this;
+        console.log( this );
+    });
+
+    $("#update").click(function () {
+        $("#slider").slider("option", "value", $("#seekTo").val());
+    });
+
+    function showValue(event, ui) {
+        $("#val").html(ui.value);
+    }
+
+
+
 });
 
 function newMessage(form) {
     var message = form.formToDict();
+    console.log( message );
     var disabled = form.find("input[type=submit]");
     disabled.disable();
     $.postJSON("/a/message/new", message, function(response) {
