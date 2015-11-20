@@ -11,22 +11,95 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 // License for the specific language governing permissions and limitations
 // under the License.
-var seekbar = new Seekbar.Seekbar({
-    renderTo: "#seekbar-container",
-    minValue: 0,
-    maxValue: 100,
-    barSize: 4,
-    needleSize: 0.8,
-    valueListener: function (value) {
-        valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
-        this.setValue( value );
-        document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
-        console.log( valor_vel );
-    },
-    value: 0
+
+$(document).ready(function() {
+    var seekbar = new Seekbar.Seekbar({
+        renderTo: "#seekbar-container",
+        minValue: 0,
+        maxValue: 100,
+        barSize: 4,
+        needleSize: 0.8,
+        valueListener: function (value) {
+            valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
+            this.setValue( value );
+            document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
+            console.log( valor_vel );
+
+            var message = {};
+            message.id = "sda";
+            message.code = "hola";
+
+            jQuery.postJSON( "/control/action/new" , message , function( response ) {
+                //updater.showMessage(response);
+                console.log( response );
+
+            });
+        },
+        value: 0
+    });
 });
 
 
+
+var updater = {
+    errorSleepTime: 500,
+    cursor: null,
+
+    poll: function() {
+        var args = {"_xsrf": getCookie("_xsrf")};
+        if (updater.cursor) args.cursor = updater.cursor;
+        $.ajax({url: "/a/message/updates", type: "POST", dataType: "text",
+                data: $.param(args), success: updater.onSuccess,
+                error: updater.onError});
+    },
+
+    onSuccess: function(response) {
+        try {
+            updater.newMessages(eval("(" + response + ")"));
+        } catch (e) {
+            updater.onError();
+            return;
+        }
+        updater.errorSleepTime = 500;
+        window.setTimeout(updater.poll, 0);
+    },
+
+    onError: function(response) {
+        updater.errorSleepTime *= 2;
+        console.log("Poll error; sleeping for", updater.errorSleepTime, "ms");
+        window.setTimeout(updater.poll, updater.errorSleepTime);
+    },
+
+    newMessages: function(response) {
+        if (!response.messages) return;
+        updater.cursor = response.cursor;
+        var messages = response.messages;
+        updater.cursor = messages[messages.length - 1].id;
+        console.log(messages.length, "new messages, cursor:", updater.cursor);
+        for (var i = 0; i < messages.length; i++) {
+            updater.showMessage(messages[i]);
+        }
+    },
+
+    showMessage: function(message) {
+        var existing = $("#m" + message.id);
+        if (existing.length > 0) return;
+        var node = $(message.html);
+        node.hide();
+        $("#inbox").append(node);
+        node.slideDown();
+    }
+};
+
+
+
+
+
+
+
+
+
+/*
 $(document).ready(function() {
 
 
@@ -179,3 +252,4 @@ var updater = {
         node.slideDown();
     }
 };
+*/

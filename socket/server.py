@@ -25,9 +25,9 @@ from tornado.concurrent import Future
 from tornado import gen
 from tornado.options import define, options, parse_command_line
 
-define("port", default=8888, help="run on the given port", type=int)
+define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
-
+print "server in  port: 7777"
 
 class MessageBuffer(object):
     def __init__(self):
@@ -109,7 +109,23 @@ class MessageUpdatesHandler(tornado.web.RequestHandler):
     def on_connection_close(self):
         global_message_buffer.cancel_wait(self.future)
 
-
+class control_action( tornado.web.RequestHandler ):
+    def post(self):
+        message = {
+            "id": str(uuid.uuid4()),
+            "body": self.get_argument("body"),
+        }
+        # to_basestring is necessary for Python 3's json encoder,
+        # which doesn't accept byte strings.
+        """
+        message["html"] = tornado.escape.to_basestring(
+            self.render_string("message.html", message=message))
+        if self.get_argument("next", None):
+            self.redirect(self.get_argument("next"))
+        else:
+            self.write(message)
+        global_message_buffer.new_messages([message])
+        """
 def main():
     parse_command_line()
     app = tornado.web.Application(
@@ -117,6 +133,7 @@ def main():
             (r"/", MainHandler),
             (r"/a/message/new", MessageNewHandler),
             (r"/a/message/updates", MessageUpdatesHandler),
+            (r"/control/action/new" , control_action )
             ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -126,6 +143,7 @@ def main():
         )
     app.listen(options.port)
     tornado.ioloop.IOLoop.current().start()
+    tornado.autoreload.wait()
 
 
 if __name__ == "__main__":
