@@ -20,7 +20,7 @@ try:
         while GPIO.input(GPIO_ECHO)==1: 
             stop = time.time()          
         elapsed = stop-start            
-        distance =round ((elapsed * 34300)/2)   
+        distance =round ((elapsed * 34300)/2,4)   
         print distance                  
         time.sleep(.3)    
 except KeyboardInterrupt:                
