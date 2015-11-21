@@ -20,20 +20,27 @@ $(document).ready(function() {
         barSize: 4,
         needleSize: 0.8,
         valueListener: function (value) {
+            /*
             valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
             this.setValue( value );
             document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
-            console.log( valor_vel );
+            */
+            var data = new FormData();
+            data.append("id", "egdfgfg");
+            data.append("code", valor_vel );
 
-            var message = {};
-            message.id = "sda";
-            message.code = "hola";
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
 
-            jQuery.postJSON( "/control/action/new" , message , function( response ) {
-                //updater.showMessage(response);
-                console.log( response );
-
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === this.DONE) {
+                    console.log(this.responseText);
+                }
             });
+
+            xhr.open("POST", "/control/action/new");
+            xhr.send( data );
+
         },
         value: 0
     });

@@ -20,7 +20,7 @@ import tornado.ioloop
 import tornado.web
 import os.path
 import uuid
-
+import pprint
 from tornado.concurrent import Future
 from tornado import gen
 from tornado.options import define, options, parse_command_line
@@ -111,13 +111,14 @@ class MessageUpdatesHandler(tornado.web.RequestHandler):
 
 class control_action( tornado.web.RequestHandler ):
     def post(self):
+        pprint.pprint( self.request.arguments , width=1 )
+        """
         message = {
             "id": str(uuid.uuid4()),
-            "body": self.get_argument("body"),
+            "body": self.get_argument("code"),
         }
         # to_basestring is necessary for Python 3's json encoder,
         # which doesn't accept byte strings.
-        """
         message["html"] = tornado.escape.to_basestring(
             self.render_string("message.html", message=message))
         if self.get_argument("next", None):
@@ -138,7 +139,7 @@ def main():
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
-        xsrf_cookies=True,
+        xsrf_cookies=False,
         debug=options.debug,
         )
     app.listen(options.port)
