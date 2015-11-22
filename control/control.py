@@ -61,6 +61,10 @@ class Control:
 
 
     def iniciar( self ):
+        self.motor01.start( 0 )
+        self.motor02.start( 0 )
+        self.motor03.start( 0 )
+        self.motor04.start( 0 )
         sleep( 2 )
         GPIO.output( self.relay , 1 )
         sleep( 2.3 )
