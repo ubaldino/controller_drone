@@ -14,6 +14,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import os , sys
+
+DIR = os.path.dirname(__file__)
+
+sys.path.append(  os.path.join( DIR , '../control')  )
+
 import logging
 import tornado.escape
 import tornado.ioloop
@@ -28,6 +34,11 @@ from tornado.options import define, options, parse_command_line
 define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
+
+from control.control import Control
+
+print Control.test()
+sys.exit( 0 )
 
 class MessageBuffer(object):
     def __init__(self):
