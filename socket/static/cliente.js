@@ -12,39 +12,65 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-$(document).ready(function() {
-    var seekbar = new Seekbar.Seekbar({
-        renderTo: "#seekbar-container",
-        minValue: 0,
-        maxValue: 100,
-        barSize: 4,
-        needleSize: 0.8,
-        valueListener: function (value) {
-            /*
-            valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
-            this.setValue( value );
-            document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
-            */
-            var data = new FormData();
-            data.append("id", "egdfgfg");
-            data.append("code", valor_vel );
+var seekbar = new Seekbar.Seekbar({
+    renderTo: "#seekbar-container",
+    minValue: 0,
+    maxValue: 100,
+    barSize: 4,
+    needleSize: 0.8,
+    valueListener: function (value) {
+        /*
+        valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
+        this.setValue( value );
+        document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
+        */
+        var data = new FormData();
+        data.append( "type" , "all" );
+        data.append( "vel" , value );
 
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
 
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === this.DONE) {
-                    console.log(this.responseText);
-                }
-            });
+        xhr.addEventListener( "readystatechange" , function () {
+            if ( this.readyState === this.DONE ) {
+                console.log( this.responseText );
+            }
+        });
 
-            xhr.open("POST", "/control/action/new");
-            xhr.send( data );
+        xhr.open( "POST", "/control/action/all" );
+        xhr.send( data );
 
-        },
-        value: 0
-    });
+    },
+    value: 0
 });
+
+
+switch_on_off = document.querySelector( ".switch label input" );
+
+switch_on_off.addEventListener( 'change' , function( evt ){
+    console.log( this.checked );
+
+    var data = new FormData();
+    data.append( "type" , "command" );
+    if ( this.checked == true )
+        data.append( "value" , "on" );
+    else
+        data.append( "value" , "off" );
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener( "readystatechange" , function () {
+        if ( this.readyState === this.DONE ) {
+            console.log( this.responseText );
+        }
+    });
+
+    xhr.open( "POST", "/control/action/on_off" );
+    xhr.send( data );
+
+});
+
 
 
 

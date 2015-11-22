@@ -52,12 +52,26 @@
     </nav>
 
 
-  <div class="row">
-    <div class="col s12 m12 l12"> <!-- Note that "m8 l9" was added -->
-      <div id="pn_velocidad"></div>
-      <div id="seekbar-container"></div>
+    <div class="row">
+      <div class="col s12 m12 l12">
+
+        <!-- Disabled Switch -->
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+
+
+      <div class="col s12 m12 l12"> <!-- Note that "m8 l9" was added -->
+        <div id="pn_velocidad"></div>
+        <div id="seekbar-container"></div>
+      </div>
     </div>
-  </div>
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="{{ static_url('bower_components/Materialize/dist/js/materialize.min.js') }}"></script>

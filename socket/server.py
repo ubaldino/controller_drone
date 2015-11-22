@@ -20,13 +20,7 @@ DIR = os.path.dirname(__file__)
 
 sys.path.append(  os.path.join( DIR , '../control' )  )
 
-from control.control import Control
-
-a = Control()
-
-print a.test()
-
-sys.exit( 0 )
+from control import Control
 
 import logging
 import tornado.escape
@@ -43,7 +37,7 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-
+CONTROL = Control()
 
 class MessageBuffer(object):
     def __init__(self):
@@ -125,24 +119,24 @@ class MessageUpdatesHandler(tornado.web.RequestHandler):
     def on_connection_close(self):
         global_message_buffer.cancel_wait(self.future)
 
-class control_action( tornado.web.RequestHandler ):
-    def post(self):
-        pprint.pprint( self.request.arguments , width=1 )
-        """
-        message = {
-            "id": str(uuid.uuid4()),
-            "body": self.get_argument("code"),
-        }
-        # to_basestring is necessary for Python 3's json encoder,
-        # which doesn't accept byte strings.
-        message["html"] = tornado.escape.to_basestring(
-            self.render_string("message.html", message=message))
-        if self.get_argument("next", None):
-            self.redirect(self.get_argument("next"))
-        else:
-            self.write(message)
-        global_message_buffer.new_messages([message])
-        """
+class control_action_all( tornado.web.RequestHandler ):
+    def post( self ):
+        #pprint.pprint( self.request.arguments , width=1 )
+        pprint.pprint( self.get_argument( "vel" ) )
+
+        vel = float( self.get_argument( "vel" ) )
+
+        CONTROL.setMotores( vel , vel , vel , vel )
+
+class control_action_on_off( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+            CONTROL.iniciar()
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            CONTROL.interrumpir()
+
 def main():
     parse_command_line()
     app = tornado.web.Application(
@@ -150,8 +144,9 @@ def main():
             (r"/", MainHandler),
             (r"/a/message/new", MessageNewHandler),
             (r"/a/message/updates", MessageUpdatesHandler),
-            (r"/control/action/new" , control_action )
-            ],
+            (r"/control/action/on_off" , control_action_on_off ),
+            (r"/control/action/all" , control_action_all )
+        ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
