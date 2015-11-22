@@ -1,4 +1,4 @@
- #Fabrica de Software.
+#Fabrica de Software.
 #Edgar E. Mamani Apaza.
 #UMSS-Ing. Electronica
 #refactor Jorge Encinas
@@ -29,6 +29,8 @@ class Control:
 
         self.tiempo = 2.3
 
+	self.estaConfigurado = False
+
         GPIO.setup( self.m1 , GPIO.OUT )
         GPIO.setup( self.m2 , GPIO.OUT )
         GPIO.setup( self.m3 , GPIO.OUT )
@@ -47,30 +49,51 @@ class Control:
         self.motor03.start( 0 )
         self.motor04.start( 0 )
 
-
+# metodo para establecer las velocidades de cada motor de 1 a 100
     def setMotores( self, vel01 , vel02 , vel03 , vel04 ):
-        self.motor01.ChangeDutyCycle( vel01 )
-        self.motor02.ChangeDutyCycle( vel02 )
-        self.motor03.ChangeDutyCycle( vel03 )
-        self.motor04.ChangeDutyCycle( vel04 )
+	if self.estaConfigurado: 
+	    vel01 = self.mapeo( vel01 ) 
+            vel02 = self.mapeo( vel02 )
+	    vel03 = self.mapeo( vel03 )
+	    vel04 = self.mapeo( vel04 )
+            self.motor01.ChangeDutyCycle( vel01 )
+            self.motor02.ChangeDutyCycle( vel02 )
+            self.motor03.ChangeDutyCycle( vel03 )
+            self.motor04.ChangeDutyCycle( vel04 )
 
-
-    def arrancar( self ):
+# metodo para iniciar la configuarcion de los motores
+    def iniciar( self ):
         sleep( 2 )
         GPIO.output( self.relay , 1 )
-        sleep( self.tiempo )
+        sleep( self.tiempo ) #2.3
+	print "configurando en alto los motoresen 4 seg."
         self.setMotores( valMaximo , valMaximo , valMaximo , valMaximo )
         sleep( 4 )
-        print "configurando en bajo los motoresen 4 seg."
+	print "configurando en bajo los motoresen 5 seg."
         self.setMotores( valMinimo , valMinimo , valMinimo , valMinimo )
         sleep( 5 )
-        print "configurando en bajo los motoresen 5 seg."
+        self.estaConfigurado = True
+
+# metodo para reiniciar los mo
+    def reiniciar( self ):
+	self.motor01.stop()
+        self.motor02.stop()
+        self.motor03.stop()
+        self.motor04.stop()
+        GPIO.output( self.relay , 0 )
+        self.motor01.start( 0 )
+        self.motor02.start( 0 )
+        self.motor03.start( 0 )
+        self.motor04.start( 0 )
+
+	iniciar()
 
     def mapeo( valor ):
         if valor <= 0: valor = 0
         elif valor >= 100: valor = 100
         return ( ( valor * 0.05 ) + 4.5 )
 
+# metodo para uso en KeyboartInterrupt
     def interrumpir():
         self.motor01.stop()
         self.motor02.stop()
@@ -88,7 +111,7 @@ class Control:
 
 try:
     print "inciciando en 2 seg"
-    arrancar()
+    iniciar()
     while True:
         dutyC = float( raw_input( "Ingresa la velocidad entre (1 - 100): " ) )
         dutyC = mapeo( dutyC )
