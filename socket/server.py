@@ -18,7 +18,15 @@ import os , sys
 
 DIR = os.path.dirname(__file__)
 
-sys.path.append(  os.path.join( DIR , '../control')  )
+sys.path.append(  os.path.join( DIR , '../control' )  )
+
+from control.control import Control
+
+a = Control()
+
+print a.test()
+
+sys.exit( 0 )
 
 import logging
 import tornado.escape
@@ -35,10 +43,7 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-from control.control import Control
 
-print Control.test()
-sys.exit( 0 )
 
 class MessageBuffer(object):
     def __init__(self):
