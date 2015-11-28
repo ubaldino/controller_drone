@@ -1,15 +1,15 @@
 
 import os , sys , serial
-
-serial_com = serial.Serial(
+"""
+#serial_com = serial.Serial(
     port = '/dev/ttyUSB0',
     baudrate = 9600 ,
     timeout = 1
 )
 
-serial_com.write( "s\n" )
-serial_com.write( "s\n" )
-
+#serial_com.write( "s\n" )
+#serial_com.write( "s\n" )
+"""
 DIR = os.path.dirname(__file__)
 
 sys.path.append(  os.path.join( DIR , '../control' )  )
@@ -84,7 +84,7 @@ class control_action_all( tornado.web.RequestHandler ):
 
         vel = int( float( self.get_argument( "vel" ) ) )
 
-        serial_com.write( "v%d\n"%(vel) )
+        #serial_com.write( "v%d\n"%(vel) )
 
 class control_action_motor( tornado.web.RequestHandler ):
     def post( self ):
@@ -94,16 +94,16 @@ class control_action_motor( tornado.web.RequestHandler ):
         vel = int( float( self.get_argument( "vel" ) ) )
 
 
-        serial_com.write( "v%d\n"%(vel) )
+        #serial_com.write( "v%d\n"%(vel) )
 
 class control_action_on_off( tornado.web.RequestHandler ):
     def post( self ):
         if self.get_argument("value") == 'on':
             print "encender"
-            serial_com.write( "c\n" )
+            #serial_com.write( "c\n" )
         elif self.get_argument("value") == 'off':
             print "apagar"
-            serial_com.write( "s\n" )
+            #serial_com.write( "s\n" )
 
 def main():
     parse_command_line()
@@ -127,6 +127,6 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        serial_com.write( "s\n" )
-        serial_com.close()
+        #serial_com.write( "s\n" )
+        #serial_com.close()
         print "Sever Close and Serial <Close></Close>"

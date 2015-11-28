@@ -12,6 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+/*
+let static = nipplejs.create({
+    zone: document.getElementById( 'joystick_right' ),
+    //zone: document.getElementById( 'joystick_right' ),
+    mode: 'static',
+    position: {left: '50%', top: '50%'},
+    color: 'red'
+});
+*/
+var options = {
+    zone: document.getElementById( 'joystick_right' )
+};
+var manager = nipplejs.create( options );
+
+/*
 var seekbar = new Seekbar.Seekbar({
     renderTo: "#seekbar-container",
     minValue: 0,
@@ -23,7 +38,7 @@ var seekbar = new Seekbar.Seekbar({
         valor_vel = ( Math.round( value ) / 20.0 ) + 4.5 ;
         this.setValue( value );
         document.getElementById( "pn_velocidad" ).innerHTML = valor_vel;
-        */
+        * /
         var data = new FormData();
         data.append( "type" , "all" );
         data.append( "vel" , value );
@@ -126,7 +141,7 @@ var updater = {
 
 
 
-
+*/
 
 
 
