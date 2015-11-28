@@ -18,8 +18,8 @@ class Control:
         self.freq = 50
         self.dutyC = 0
 
-        self.valMinimo = 4.5
-        self.valMaximo = 9.5
+        self.valMinimo = 4 #4.5
+        self.valMaximo = 10.5#9.5
 
         self.m1 = 17
         self.m2 = 27
@@ -77,7 +77,8 @@ class Control:
     def mapeo( self, valor ):
         if valor < 0: valor = 0
         elif valor > 100: valor = 100
-        return ( valor * 0.05 ) + 4.5
+       # return ( valor * 0.05 ) + 8.5 """4.5"""
+        return ( valor * ( self.valMaximo - self.valMinimo ) / 100 ) + self.valMinimo
 
     def interrumpir( self ):
         self.motor01.stop()

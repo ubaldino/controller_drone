@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="http://yoannmoinet.github.io/nipplejs/stylesheets/styles.css" media="screen" title="no title" charset="utf-8">
+        <!--<link rel="stylesheet" href="http://yoannmoinet.github.io/nipplejs/stylesheets/styles.css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="http://yoannmoinet.github.io/nipplejs/stylesheets/github-light.css" media="screen" title="no title" charset="utf-8">
+        -->
 
 
 
@@ -19,10 +20,6 @@
       <script type="text/javascript" src="{{ static_url('seekbar.js') }}"></script>
 
       <link rel="stylesheet" href="{{ static_url('styles.css') }}" type="text/css">
-      <link rel="stylesheet" href="{{ static_url('styles.css') }}" type="text/css">
-
-
-
 
         <style>
 
@@ -524,13 +521,18 @@ footer nav a {
   font-size: 3em;
 }
 
+img.video_c{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 
         </style>
     </head>
     <body>
-
-
 
     <!--
     <nav>
@@ -553,13 +555,25 @@ footer nav a {
     </nav>
       -->
 
-
-
-
 <section id="main">
+  <img class="video_c" src="http://192.168.1.147:8080/?action=stream" ></img>
+
+      <div class="col s12 m12 l12">
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+
+      <div id="seekbar-container-vertical-blue" style="width:50px;height:300px;float:left;left: -1em;"></div>
       <article id="article_3" class="active">
 
               <div id='controller' class="joydiv-controller">
+
                   <div id="bgcontroller"></div>
 
                   <div class="joydiv-up"></div>
@@ -603,19 +617,6 @@ footer nav a {
 
 
       <!--
-      <div class="col s12 m12 l12">
-
-        < ! - - Disabled Switch - - >
-        <div class="switch">
-          <label>
-            Off
-            <input type="checkbox">
-            <span class="lever"></span>
-            On
-          </label>
-        </div>
-      </div>
-
 
       <div class="col s12 m12 l12"> < ! - -  Note that "m8 l9" was added - - >
         <div id="pn_velocidad"></div>
@@ -625,8 +626,9 @@ footer nav a {
     </div>
     <!--Import jQuery before materialize.js -->
     <script type="text/javascript" src="{{ static_url('bower_components/Materialize/dist/js/materialize.min.js') }}"></script>
-    <!--<script src="{{ static_url('cliente.js') }}" type="text/javascript"></script>-->
+    <!--<script src="{{ static_url('cliente.js') }}" type="text/javascript"></script>
       <script type="text/javascript" src="{{ static_url('nipplejs.min.js') }}"></script>
+      º-->
       <script type="text/javascript" charset="UTF-8" src="{{ static_url('joydiv.js') }}"></script>
       <script type="text/javascript">
 
@@ -706,6 +708,21 @@ footer nav a {
 
       <script type="text/javascript">
 
+            function send_post ( url , data ){
+              var xhr = new XMLHttpRequest();
+              xhr.withCredentials = true;
+
+              xhr.addEventListener( "readystatechange" , function () {
+                  if ( this.readyState === this.DONE ) {
+                      console.log( this.responseText );
+                  }
+              });
+
+
+              xhr.open( "POST", url );
+              xhr.send( data );
+            }
+
             var element = document.getElementById('controller');
             var joydiv = new JoydivModule.Joydiv( { 'element' : element } );
 
@@ -718,12 +735,15 @@ footer nav a {
 
                 switch( aux.name ){
                   case 'up' :
-                    up_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
+                    up_val =  ( 0 + ( 50 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
                   break;
                   case 'right' :
                     right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
+                    var data = new FormData();
+                    data.append( "yaw" , right_val );
+                    send_post( "/control/action/yaw" , data );
                   break;
                   case 'down' :
                     down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
@@ -732,6 +752,9 @@ footer nav a {
                   case 'left' :
                     left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
+                    var data = new FormData();
+                    data.append( "yaw" , left_val );
+                    send_post( "/control/action/yaw" , data );
                   break;
                   case 'up-right' :
                     up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
@@ -748,6 +771,12 @@ footer nav a {
                   case 'up-left' :
                     up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
+                  break;
+                  case 'none' :
+                    var data = new FormData();
+                    data.append( "yaw" , 50 );
+                    send_post( "/control/action/yaw" , data );
+                    console.log( "______  none ----------" );
                   break;
                 }
 
@@ -768,19 +797,32 @@ footer nav a {
                   case 'up' :
                     up_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
+                    var data = new FormData();
+                    data.append( "roll" , up_val );
+                    send_post( "/control/action/roll" , data )
                   break;
                   case 'right' :
                     right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
+                    var data = new FormData();
+                    data.append( "pitch" , right_val );
+                    send_post( "/control/action/pitch" , data );
                   break;
                   case 'down' :
                     down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
+                    var data = new FormData();
+                    data.append( "roll" , down_val );
+                    send_post( "/control/action/roll" , data );
                   break;
                   case 'left' :
                     left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
+                    var data = new FormData();
+                    data.append( "pitch" , left_val );
+                    send_post( "/control/action/pitch" , data );
                   break;
+
                   case 'up-right' :
                     up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'up-right' , ( up_right_val <= 100 ) ? up_right_val : 100 );
@@ -797,9 +839,27 @@ footer nav a {
                     up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
                     console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
                   break;
+
+                  case 'none' :
+                    var data = new FormData();
+                    data.append( "roll" , 50 );
+                    data.append( "pitch" , 50 );
+                    send_post( "/control/action/roll" , data );
+                    send_post( "/control/action/pitch" , data );
+                    console.log( "______  none ----------" );
+                  break;
                 }
             });
 
+
+
+            /*
+            sen_post( "/control/action/aux_1" , data )
+            sen_post( "/control/action/aux_2" , data )
+            sen_post( "/control/action/interrumpir" , data )
+            sen_post( "/control/action/reiniciar" , data )
+            sen_post( "/control/action/resetear_valores" , data )
+            */
 
 
             /*
@@ -856,6 +916,55 @@ footer nav a {
                 }, 30);
             }, false);
             */
+
+
+             var blueSlider = new Seekbar.Seekbar({
+                renderTo: "#seekbar-container-vertical-blue",
+                minValue: 0, maxValue: 100,
+                barSize : 4,
+                needleSize : 0.2,
+                valueListener: function ( value ) {
+                    throttle_val = Math.round( value );
+                    this.value = throttle_val;
+                    var data = new FormData();
+                    data.append( "throttle" , throttle_val );
+                    send_post( "/control/action/throttle" , data );
+                    console.log( throttle_val );
+                },
+                thumbColor: '#cc006699', // ARGB is supported, Alpha, Red, Green and Blue
+                negativeColor: '#006699',
+                positiveColor: '#CCC',
+                value: 0
+            });
+
+            switch_on_off = document.querySelector( ".switch label input" );
+
+            switch_on_off.addEventListener( 'change' , function( evt ){
+                console.log( this.checked );
+
+                var data = new FormData();
+                data.append( "type" , "command" );
+                if ( this.checked == true )
+                    data.append( "value" , "on" );
+                else
+                    data.append( "value" , "off" );
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener( "readystatechange" , function () {
+                    if ( this.readyState === this.DONE ) {
+                        console.log( this.responseText );
+                    }
+                });
+
+                xhr.open( "POST", "/control/action/on_off" );
+                xhr.send( data );
+
+            });
+
+
+
         </script>
 
 

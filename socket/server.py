@@ -29,6 +29,10 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
+from ControlRemoto import ControlRemoto
+
+control_remoto = ControlRemoto()
+
 class MessageBuffer(object):
     def __init__(self):
         self.waiters = set()
@@ -99,11 +103,67 @@ class control_action_motor( tornado.web.RequestHandler ):
 class control_action_on_off( tornado.web.RequestHandler ):
     def post( self ):
         if self.get_argument("value") == 'on':
-            print "encender"
-            #serial_com.write( "c\n" )
+            print "reiniciar"
+            #control_remoto.reiniciar()
         elif self.get_argument("value") == 'off':
             print "apagar"
-            #serial_com.write( "s\n" )
+            #control_remoto.interrumpir()
+
+class control_action_roll( tornado.web.RequestHandler ):
+    def post( self ):
+        pprint.pprint( int( self.get_argument( "roll" ) ) )
+        control_remoto.setAleron( int( self.get_argument( "roll" ) ) )
+
+class control_action_pitch( tornado.web.RequestHandler ):
+    def post( self ):
+        control_remoto.setElevador( int( self.get_argument( "pitch" ) ) )
+class control_action_throttle( tornado.web.RequestHandler ):
+    def post( self ):
+        control_remoto.setAcelerador( int( self.get_argument( "throttle" ) ) )
+class control_action_yaw( tornado.web.RequestHandler ):
+    def post( self ):
+        control_remoto.setTimon( int( self.get_argument( "yaw" ) ) )
+class control_action_aux_1( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            control_remoto.setAux1( 60 )
+
+class control_action_aux_2( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            control_remoto.setAux2( 60 )
+
+class control_action_interrumpir( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            control_remoto.interrumpir()
+
+
+class control_action_reiniciar( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            control_remoto.reiniciar()
+
+class control_action_resetear_valores( tornado.web.RequestHandler ):
+    def post( self ):
+        if self.get_argument("value") == 'on':
+            print "encender"
+        elif self.get_argument("value") == 'off':
+            print "apagar"
+            control_remoto.resetearValores()
+
 
 def main():
     parse_command_line()
@@ -111,7 +171,20 @@ def main():
         [
             (r"/", MainHandler),
             (r"/control/action/on_off" , control_action_on_off ),
-            (r"/control/action/all" , control_action_all )
+            (r"/control/action/all" , control_action_all ),
+
+            (r"/control/action/roll" , control_action_roll ),
+            (r"/control/action/pitch" , control_action_pitch ),
+            (r"/control/action/throttle" , control_action_throttle ),
+            (r"/control/action/yaw" , control_action_yaw ),
+
+            (r"/control/action/aux_1" , control_action_aux_1 ),
+            (r"/control/action/aux_2" , control_action_aux_2 ),
+
+            (r"/control/action/interrumpir" , control_action_interrumpir ),
+            (r"/control/action/reiniciar" , control_action_reiniciar ),
+            (r"/control/action/resetear_valores" , control_action_resetear_valores )
+
         ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
