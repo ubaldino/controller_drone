@@ -1,0 +1,708 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #222;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+#main #head_control {
+  *zoom: 1;
+  width: auto;
+  max-width: 85%;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  top: 1em;
+}
+#main #head_control:before,
+#main #head_control:after {
+  content: '';
+  display: table;
+}
+#main #head_control:after {
+  clear: both;
+}
+#main #head_control #slider_aux_1 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 22.75%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#main #head_control #slider_aux_1:before,
+#main #head_control #slider_aux_1:after {
+  content: '';
+  display: table;
+}
+#main #head_control #slider_aux_1:after {
+  clear: both;
+}
+#main #head_control #slider_aux_1:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #head_control #slider_aux_1:nth-child(3n+1) {
+  clear: both;
+}
+#main #head_control #slider_on_off {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 14.166666666666664%;
+  margin-left: 17.166666666666664%;
+  margin-right: 3%;
+}
+#main #head_control #slider_on_off:before,
+#main #head_control #slider_on_off:after {
+  content: '';
+  display: table;
+}
+#main #head_control #slider_on_off:after {
+  clear: both;
+}
+#main #head_control #slider_on_off:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #head_control #slider_on_off:nth-child(3n+1) {
+  clear: both;
+}
+#main #head_control #slider_aux_2 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 22.75%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#main #head_control #slider_aux_2:before,
+#main #head_control #slider_aux_2:after {
+  content: '';
+  display: table;
+}
+#main #head_control #slider_aux_2:after {
+  clear: both;
+}
+#main #head_control #slider_aux_2:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #head_control #slider_aux_2:nth-child(3n+1) {
+  clear: both;
+}
+#main #head_control .ui-slider-handle {
+  width: 35px;
+  height: 35px;
+  top: -12px;
+  background: #702861;
+}
+#main #cv_control {
+  position: absolute;
+  top: 4em;
+  right: 1em;
+  width: 10em;
+  z-index: 1;
+}
+@media only screen and (max-width: 767px) {
+  #main #cv_control {
+    right: 0em;
+    width: 8em;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #cv_control {
+    right: 0em;
+    width: 8em;
+  }
+}
+#main #cv_control label.radios_cv {
+  display: block;
+  margin-bottom: 1.6em;
+}
+@media only screen and (max-width: 767px) {
+  #main #cv_control label.radios_cv {
+    margin-bottom: 0em;
+    font-size: 0.7em;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #cv_control label.radios_cv {
+    font-size: 0.7em;
+    margin-bottom: 1.9em;
+  }
+}
+#main #cv_control .radio .icon-checked::before {
+  content: "";
+  font-size: 1.8em;
+}
+@media only screen and (max-width: 767px) {
+  #main #cv_control .radio .icon-checked::before {
+    font-size: 1.2em;
+  }
+}
+#main #cv_control .radio .icon-unchecked::before {
+  content: "";
+  font-size: 1.8em;
+}
+@media only screen and (max-width: 767px) {
+  #main #cv_control .radio .icon-unchecked::before {
+    font-size: 1.2em;
+  }
+}
+#main #cv_control .checkbox .icons,
+#main #cv_control .radio .icons {
+  left: -0.5em;
+}
+#main #controller_joystick {
+  *zoom: 1;
+  width: auto;
+  max-width: 100%;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  bottom: 0em;
+  width: 100%;
+}
+#main #controller_joystick:before,
+#main #controller_joystick:after {
+  content: '';
+  display: table;
+}
+#main #controller_joystick:after {
+  clear: both;
+}
+#main #controller_joystick #slider_throttle {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 5.583333333333332%;
+  margin-left: 0%;
+  margin-right: 3%;
+  width: 1.6em;
+  left: 0.8em;
+}
+#main #controller_joystick #slider_throttle:before,
+#main #controller_joystick #slider_throttle:after {
+  content: '';
+  display: table;
+}
+#main #controller_joystick #slider_throttle:after {
+  clear: both;
+}
+#main #controller_joystick #slider_throttle:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #controller_joystick #slider_throttle:nth-child(3n+1) {
+  clear: both;
+}
+#main #controller_joystick #slider_throttle .ui-slider-handle {
+  width: 35px;
+  height: 35px;
+  left: -2px;
+  background: #f9ce47;
+}
+#main #controller_joystick #joystick_left {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 39.91666666666667%;
+  margin-left: 0%;
+  margin-right: 3%;
+  position: absolute;
+  bottom: 35%;
+  left: 15%;
+  width: 150px;
+  height: 150px;
+  font-size: 150px;
+}
+#main #controller_joystick #joystick_left:before,
+#main #controller_joystick #joystick_left:after {
+  content: '';
+  display: table;
+}
+#main #controller_joystick #joystick_left:after {
+  clear: both;
+}
+#main #controller_joystick #joystick_left:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #controller_joystick #joystick_left:nth-child(3n+1) {
+  clear: both;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_left {
+    bottom: 0px;
+    left: 19%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_left {
+    width: 100px;
+    height: 100px;
+    font-size: 90px;
+    bottom: 0.7em;
+    left: 0.7em;
+  }
+}
+@media only screen and (max-width: 267px) {
+  #main #controller_joystick #joystick_left {
+    bottom: 1em;
+  }
+}
+#main #controller_joystick #joystick_left #bg_joystick_left {
+  position: relative;
+  opacity: 0.3;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  padding: 0.96em;
+  bottom: 48%;
+  left: -45%;
+  -webkit-border-radius: 50em;
+  border-radius: 50em;
+  border: solid 1px #000;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_left #bg_joystick_left {
+    padding: 0.7em;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_left #bg_joystick_left {
+    padding: 0.8em;
+    left: -22px;
+    bottom: 22px;
+  }
+}
+#main #controller_joystick #joystick_left .joydiv-up,
+#main #controller_joystick #joystick_left .joydiv-left,
+#main #controller_joystick #joystick_left .joydiv-right,
+#main #controller_joystick #joystick_left .joydiv-down,
+#main #controller_joystick #joystick_left .joydiv-n,
+#main #controller_joystick #joystick_left .joydiv-m {
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: solid transparent;
+}
+#main #controller_joystick #joystick_left .joydiv-up {
+  top: -40%;
+  left: 50%;
+  margin-left: -40%;
+  border-bottom-color: #f12f02;
+  border-top-width: 0;
+  border-left-width: 0.4em;
+  border-right-width: 0.4em;
+  border-bottom-width: 0.45em;
+  display: none;
+}
+#main #controller_joystick #joystick_left .joydiv-left {
+  left: -40%;
+  top: 35%;
+  border-right-color: #f3b802;
+  border-top-width: 0.4em;
+  border-left-width: 0;
+  border-right-width: 0.45em;
+  border-bottom-width: 0.4em;
+  margin-top: -25%;
+  display: none;
+}
+#main #controller_joystick #joystick_left .joydiv-right {
+  right: -40%;
+  top: 50%;
+  margin-top: -40%;
+  border-left-color: #f3b802;
+  border-top-width: 0.4em;
+  border-left-width: 0.45em;
+  border-right-width: 0;
+  border-bottom-width: 0.4em;
+  display: none;
+}
+#main #controller_joystick #joystick_left .joydiv-down {
+  bottom: -40%;
+  left: 50%;
+  margin-left: -40%;
+  border-top-color: #f12f02;
+  border-top-width: 0.45em;
+  border-left-width: 0.4em;
+  border-right-width: 0.4em;
+  border-bottom-width: 0;
+  display: none;
+}
+#main #controller_joystick #joystick_left .joydiv-trackpad {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: solid 1px #33517a;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_left .joydiv-trackpad {
+    left: 0%;
+    right: 50%;
+    top: 0%;
+    bottom: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_left .joydiv-trackpad {
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+  }
+}
+#main #controller_joystick #joystick_left .joydiv-trackpad .joydiv-tracker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.2em;
+  margin-left: -0.2em;
+  margin-top: -0.2em;
+  border-color: #009865;
+}
+#main #controller_joystick #joystick_right {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 39.91666666666667%;
+  margin-left: 0%;
+  margin-right: 3%;
+  position: absolute;
+  bottom: 35%;
+  right: 15%;
+  color: #eb012c;
+  width: 150px;
+  height: 150px;
+  font-size: 150px;
+}
+#main #controller_joystick #joystick_right:before,
+#main #controller_joystick #joystick_right:after {
+  content: '';
+  display: table;
+}
+#main #controller_joystick #joystick_right:after {
+  clear: both;
+}
+#main #controller_joystick #joystick_right:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#main #controller_joystick #joystick_right:nth-child(3n+1) {
+  clear: both;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_right {
+    bottom: 0px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_right {
+    width: 100px;
+    height: 100px;
+    font-size: 90px;
+    bottom: 0.7em;
+    right: 0.45em;
+  }
+}
+#main #controller_joystick #joystick_right #bg_joystick_right {
+  position: relative;
+  opacity: 0.3;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  padding: 0.96em;
+  bottom: 47%;
+  left: -46%;
+  -webkit-border-radius: 50em;
+  border-radius: 50em;
+  border: solid 1px #000;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_right #bg_joystick_right {
+    padding: 0.7em;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_right #bg_joystick_right {
+    padding: 0.8em;
+    left: -22px;
+    bottom: 22px;
+  }
+}
+#main #controller_joystick #joystick_right .joydiv-up,
+#main #controller_joystick #joystick_right .joydiv-left,
+#main #controller_joystick #joystick_right .joydiv-right,
+#main #controller_joystick #joystick_right .joydiv-down,
+#main #controller_joystick #joystick_right .joydiv-n,
+#main #controller_joystick #joystick_right .joydiv-m {
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: solid transparent;
+}
+#main #controller_joystick #joystick_right .joydiv-up {
+  top: -40%;
+  left: 50%;
+  margin-left: -40%;
+  border-bottom-color: #f12f02;
+  border-top-width: 0;
+  border-left-width: 0.4em;
+  border-right-width: 0.4em;
+  border-bottom-width: 0.45em;
+  display: none;
+}
+#main #controller_joystick #joystick_right .joydiv-left {
+  left: -40%;
+  top: 35%;
+  border-right-color: #f3b802;
+  border-top-width: 0.4em;
+  border-left-width: 0;
+  border-right-width: 0.45em;
+  border-bottom-width: 0.4em;
+  margin-top: -25%;
+  display: none;
+}
+#main #controller_joystick #joystick_right .joydiv-right {
+  right: -40%;
+  top: 50%;
+  margin-top: -40%;
+  border-left-color: #f3b802;
+  border-top-width: 0.4em;
+  border-left-width: 0.45em;
+  border-right-width: 0;
+  border-bottom-width: 0.4em;
+  display: none;
+}
+#main #controller_joystick #joystick_right .joydiv-down {
+  bottom: -40%;
+  left: 50%;
+  margin-left: -40%;
+  border-top-color: #f12f02;
+  border-top-width: 0.45em;
+  border-left-width: 0.4em;
+  border-right-width: 0.4em;
+  border-bottom-width: 0;
+  display: none;
+}
+#main #controller_joystick #joystick_right .joydiv-trackpad {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: solid 1px #33517a;
+}
+@media only screen and (max-width: 767px) {
+  #main #controller_joystick #joystick_right .joydiv-trackpad {
+    left: 0%;
+    right: 50%;
+    top: 0%;
+    bottom: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #main #controller_joystick #joystick_right .joydiv-trackpad {
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+  }
+}
+#main #controller_joystick #joystick_right .joydiv-trackpad .joydiv-tracker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.2em;
+  margin-left: -0.2em;
+  margin-top: -0.2em;
+  border-color: #11adb9;
+}
+img.video_c {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.fadein {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: opacity 1s ease-in;
+}
+.fadeout {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 1s ease-out;
+}
+textarea {
+  font: 16px "Source Sans", helvetica, arial, sans-serif;
+  font-weight: 200;
+  display: block;
+  -webkit-border-radius: 6px;
+  width: 100%;
+  height: 140px;
+}
+.dispositivo {
+  font-size: 2em;
+}
+.dispositivo #deviceList {
+  padding: 25px;
+  margin: 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: #f8f8f8;
+  color: #888;
+  border: none;
+  outline: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+#connection {
+  padding: 7%;
+  margin-bottom: 40px;
+  text-align: center;
+}
+#chat {
+  display: none;
+  margin: 20px;
+}
+#sendButton {
+  margin-top: 4px;
+}
+#message {
+  max-width: 185px;
+}
+select {
+  min-width: 200px;
+}
+form {
+  margin-bottom: 20px;
+}
+footer nav {
+  padding: 0px;
+}
+footer nav a {
+  font-size: 3em;
+}

@@ -1,538 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!--<link rel="stylesheet" href="http://yoannmoinet.github.io/nipplejs/stylesheets/styles.css" media="screen" title="no title" charset="utf-8">
-        <link rel="stylesheet" href="http://yoannmoinet.github.io/nipplejs/stylesheets/github-light.css" media="screen" title="no title" charset="utf-8">
-        -->
+<head>
+  <meta charset="UTF-8">
+  <title>DronSimon</title>
 
-
-
-        <meta charset="UTF-8">
-      <title>DronSimon</title>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="{{ static_url('bower_components/Materialize/dist/css/materialize.min.css') }}"  media="screen,projection"/>
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <script src="{{ static_url('bower_components/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
-      <script type="text/javascript" src="{{ static_url('seekbar.js') }}"></script>
-
-      <link rel="stylesheet" href="{{ static_url('styles.css') }}" type="text/css">
-
-        <style>
-
-        #main #article_1 {
-  background: #80cef0;
-}
-#main #article_2 {
-  background: #80cef0;
-}
-#main #article_3 {
-  *zoom: 1;
-  width: auto;
-  max-width: 99%;
-  float: none;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 0;
-  padding-right: 0;
-}
-#main #article_3:before,
-#main #article_3:after {
-  content: '';
-  display: table;
-}
-#main #article_3:after {
-  clear: both;
-}
-#main #article_3 #controller {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  padding-left: 0;
-  padding-right: 0;
-  width: 48.5%;
-  margin-left: 0%;
-  margin-right: 3%;
-  position: absolute;
-  bottom: 35%;
-  left: 15%;
-  width: 150px;
-  height: 150px;
-  font-size: 150px;
-}
-#main #article_3 #controller:before,
-#main #article_3 #controller:after {
-  content: '';
-  display: table;
-}
-#main #article_3 #controller:after {
-  clear: both;
-}
-#main #article_3 #controller:nth-child(2n) {
-  margin-right: 0%;
-  float: right;
-}
-#main #article_3 #controller:nth-child(2n + 1) {
-  clear: both;
-}
-#main #article_3 #controller #bgcontroller {
-  position: relative;
-  background: rgba(0,68,34,0.91);
-  opacity: 0.3;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-  padding: 0.96em;
-  bottom: 48%;
-  left: -45%;
-  -webkit-border-radius: 50em;
-  border-radius: 50em;
-}
-@media only screen and (max-width: 480px) {
-  #main #article_3 #controller {
-    width: 100px;
-    height: 100px;
-    font-size: 90px;
-    bottom: 1em;
-  }
-}
-#main #article_3 #controller .joydiv-up,
-#main #article_3 #controller .joydiv-left,
-#main #article_3 #controller .joydiv-right,
-#main #article_3 #controller .joydiv-down,
-#main #article_3 #controller .joydiv-n,
-#main #article_3 #controller .joydiv-m {
-  position: absolute;
-  width: 0;
-  height: 0;
-  background: transparent;
-  border: solid transparent;
-}
-#main #article_3 #controller .joydiv-up {
-  top: -40%;
-  left: 50%;
-  margin-left: -40%;
-  border-bottom-color: #f12f02;
-  border-top-width: 0;
-  border-left-width: 0.4em;
-  border-right-width: 0.4em;
-  border-bottom-width: 0.45em;
-}
-#main #article_3 #controller .joydiv-left {
-  left: -40%;
-  top: 35%;
-  border-right-color: #f3b802;
-  border-top-width: 0.4em;
-  border-left-width: 0;
-  border-right-width: 0.45em;
-  border-bottom-width: 0.4em;
-  margin-top: -25%;
-}
-#main #article_3 #controller .joydiv-right {
-  right: -40%;
-  top: 50%;
-  margin-top: -40%;
-  border-left-color: #f3b802;
-  border-top-width: 0.4em;
-  border-left-width: 0.45em;
-  border-right-width: 0;
-  border-bottom-width: 0.4em;
-}
-#main #article_3 #controller .joydiv-down {
-  bottom: -40%;
-  left: 50%;
-  margin-left: -40%;
-  border-top-color: #f12f02;
-  border-top-width: 0.45em;
-  border-left-width: 0.4em;
-  border-right-width: 0.4em;
-  border-bottom-width: 0;
-}
-#main #article_3 #controller .joydiv-trackpad {
-  position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 25%;
-  bottom: 25%;
-  background: #01be46;
-  -webkit-border-radius: 20%;
-  border-radius: 20%;
-}
-#main #article_3 #controller .joydiv-trackpad .joydiv-tracker {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 0.2em;
-  margin-left: -0.2em;
-  margin-top: -0.2em;
-  border-color: #0067c3;
-}
-#main #article_3 #controller2 {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  padding-left: 0;
-  padding-right: 0;
-  width: 48.5%;
-  margin-left: 0%;
-  margin-right: 3%;
-  position: absolute;
-  bottom: 35%;
-  right: 15%;
-  color: #eb012c;
-  width: 150px;
-  height: 150px;
-  font-size: 150px;
-}
-#main #article_3 #controller2:before,
-#main #article_3 #controller2:after {
-  content: '';
-  display: table;
-}
-#main #article_3 #controller2:after {
-  clear: both;
-}
-#main #article_3 #controller2:nth-child(2n) {
-  margin-right: 0%;
-  float: right;
-}
-#main #article_3 #controller2:nth-child(2n + 1) {
-  clear: both;
-}
-#main #article_3 #controller2 #bgcontroller2 {
-  position: relative;
-  background: rgba(0,68,34,0.91);
-  opacity: 0.3;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-  padding: 0.96em;
-  bottom: 47%;
-  left: -46%;
-  -webkit-border-radius: 50em;
-  border-radius: 50em;
-}
-@media only screen and (max-width: 480px) {
-  #main #article_3 #controller2 {
-    width: 100px;
-    height: 100px;
-    font-size: 90px;
-    bottom: 1em;
-  }
-}
-#main #article_3 #controller2 .joydiv-up,
-#main #article_3 #controller2 .joydiv-left,
-#main #article_3 #controller2 .joydiv-right,
-#main #article_3 #controller2 .joydiv-down,
-#main #article_3 #controller2 .joydiv-n,
-#main #article_3 #controller2 .joydiv-m {
-  position: absolute;
-  width: 0;
-  height: 0;
-  background: transparent;
-  border: solid transparent;
-}
-#main #article_3 #controller2 .joydiv-up {
-  top: -40%;
-  left: 50%;
-  margin-left: -40%;
-  border-bottom-color: #f12f02;
-  border-top-width: 0;
-  border-left-width: 0.4em;
-  border-right-width: 0.4em;
-  border-bottom-width: 0.45em;
-}
-#main #article_3 #controller2 .joydiv-left {
-  left: -40%;
-  top: 35%;
-  border-right-color: #f3b802;
-  border-top-width: 0.4em;
-  border-left-width: 0;
-  border-right-width: 0.45em;
-  border-bottom-width: 0.4em;
-  margin-top: -25%;
-}
-#main #article_3 #controller2 .joydiv-right {
-  right: -40%;
-  top: 50%;
-  margin-top: -40%;
-  border-left-color: #f3b802;
-  border-top-width: 0.4em;
-  border-left-width: 0.45em;
-  border-right-width: 0;
-  border-bottom-width: 0.4em;
-}
-#main #article_3 #controller2 .joydiv-down {
-  bottom: -40%;
-  left: 50%;
-  margin-left: -40%;
-  border-top-color: #f12f02;
-  border-top-width: 0.45em;
-  border-left-width: 0.4em;
-  border-right-width: 0.4em;
-  border-bottom-width: 0;
-}
-#main #article_3 #controller2 .joydiv-trackpad {
-  position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 25%;
-  bottom: 25%;
-  background: #01be46;
-  -webkit-border-radius: 20%;
-  border-radius: 20%;
-}
-#main #article_3 #controller2 .joydiv-trackpad .joydiv-tracker {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 0.2em;
-  margin-left: -0.2em;
-  margin-top: -0.2em;
-  border-color: #0067c3;
-}
-/*
-#controller
-    width:150px;
-    height:150px;
-    font-size:150px;//font-size is used to determine the size of arrows
-    #bgcontroller
-        position relative
-        background: $cinstagram
-        opacity: 0.3
-        padding: 0.96em
-        top -45%
-        left -45%
-        border-radius: 50em
-    +below( 480px )
-        width:100px;
-        height:100px;
-        font-size:90px;//font-size is used to determine the size of arrows
-        bottom: 1em
-.joydiv-controller
-    position absolute
-    bottom 35%
-    left 15%
-    .joydiv-up ,.joydiv-left, .joydiv-right, .joydiv-down, .joydiv-n, .joydiv-m
-        position absolute
-        width 0
-        height 0
-        background  transparent
-        border solid transparent
-
-    .joydiv-up
-        top -40%
-        left 50%
-        margin-left -40%
-        border-bottom-color $color10
-        border-top-width 0
-        border-left-width .40em
-        border-right-width .40em
-        border-bottom-width .45em
-
-    .joydiv-left
-        left  -40%
-        top  35%
-        border-right-color  $color9
-        border-top-width  .40em
-        border-left-width  0
-        border-right-width  .45em
-        border-bottom-width  .40em
-        margin-top -25%
-
-    .joydiv-right
-        right -40%
-        top 50%
-        margin-top -40%
-        border-left-color  $color9
-        border-top-width  .40em
-        border-left-width  .45em
-        border-right-width  0
-        border-bottom-width  .40em
-
-    .joydiv-down
-        bottom -40%
-        left 50%
-        margin-left -40%
-        border-top-color  $color10
-        border-top-width  .45em
-        border-left-width  .40em
-        border-right-width  .40em
-        border-bottom-width  0
-
-
-    .joydiv-trackpad
-        position absolute
-        left 25%
-        right 25%
-        top 25%
-        bottom 25%
-        background $color8
-        border-radius 20%
-
-        .joydiv-tracker
-            position absolute
-            top 50%
-            left 50%
-            border-radius 50%
-            border-style solid
-            border-width .2em
-            margin-left -.2em
-            margin-top -.2em
-            border-color $color7
-
-
-#joydiv-n
-    position absolute
-    background $color2
-    bottom 42%
-    right 4%
-    font-size 25px
-    border-color $color2
-    padding 0.6em 1.5em
-    +below( 480px )
-        font-size 15px
-        padding 0.6em 1.1em
-
-#joydiv-m
-    position absolute
-    background $color3
-    font-size 25px
-    padding 0.6em 1.5em
-    bottom 42%
-    right 22%
-    +below( 480px )
-        font-size 15px
-        padding 0.6em 1.1em
-
-#joydiv-l
-    position absolute
-    font-size 25px
-    background $color4
-    padding 0.6em 0.5em
-    bottom 42%
-    right 40%
-    +below( 480px )
-        font-size 15px
-        padding 0.6em 1.1em
-
-#article_2
-    position: relative
-    background $color3
-    color $color9
-    font-size 20px
-    div
-        text-align center
-        h1
-            font-weight bold
-            font-size 3.5em
-            color $color10
-            padding 8px
-        ul
-            position absolute
-            top 65%
-            left 28%
-            text-align center
-            list-style none
-            li
-                text-align center
-                line-height 2
-                font-size 1.4em
-                font-weight: bold
-
-*/
-.fadein {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
-  -webkit-transition: opacity 1s ease-in;
-}
-.fadeout {
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  -webkit-transition: opacity 1s ease-out;
-}
-textarea {
-  font: 16px "Source Sans", helvetica, arial, sans-serif;
-  font-weight: 200;
-  display: block;
-  -webkit-border-radius: 6px;
-  width: 100%;
-  height: 140px;
-}
-.dispositivo {
-  font-size: 2em;
-}
-.dispositivo #deviceList {
-  padding: 25px;
-  margin: 0;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background: #f8f8f8;
-  color: #888;
-  border: none;
-  outline: none;
-  display: inline-block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-}
-#connection {
-  padding: 7%;
-  margin-bottom: 40px;
-  text-align: center;
-}
-#chat {
-  display: none;
-  margin: 20px;
-}
-#sendButton {
-  margin-top: 4px;
-}
-#message {
-  max-width: 185px;
-}
-select {
-  min-width: 200px;
-}
-form {
-  margin-bottom: 20px;
-}
-footer nav {
-  padding: 0px;
-}
-footer nav a {
-  font-size: 3em;
-}
-
-img.video_c{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-
-        </style>
-    </head>
-    <body>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ static_url('bower_components/flat-ui/dist/css/flat-ui.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ static_url('styles.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ static_url('css/styles.css') }}" type="text/css">
+  <script src="{{ static_url('bower_components/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
+</head>
+<body>
 
     <!--
     <nav>
@@ -555,419 +34,106 @@ img.video_c{
     </nav>
       -->
 
-<section id="main">
-  <img class="video_c" src="http://192.168.1.147:8080/?action=stream" ></img>
-
-      <div class="col s12 m12 l12">
-        <div class="switch">
-          <label>
-            Off
-            <input type="checkbox">
-            <span class="lever"></span>
-            On
-          </label>
-        </div>
-      </div>
-
-      <div id="seekbar-container-vertical-blue" style="width:50px;height:300px;float:left;left: -1em;"></div>
-      <article id="article_3" class="active">
-
-              <div id='controller' class="joydiv-controller">
-
-                  <div id="bgcontroller"></div>
-
-                  <div class="joydiv-up"></div>
-                  <div class="joydiv-left"></div>
-                  <div class="joydiv-right"></div>
-                  <div class="joydiv-down"></div>
-
-                  <div class="joydiv-trackpad">
-                      <div class="joydiv-tracker"></div>
-                  </div>
-              </div>
-
-              <div id='controller2' class="joydiv-controller">
-                  <div id="bgcontroller2"></div>
-                  <div class="joydiv-up"></div>
-                  <div class="joydiv-left"></div>
-                  <div class="joydiv-right"></div>
-                  <div class="joydiv-down"></div>
-                  <div class="joydiv-trackpad">
-                      <div class="joydiv-tracker"></div>
-                  </div>
-              </div>
-
-          <input type="text" id="direction" readonly>
-      </article>
-</section>
-
-
-<!--
-    <div class="row">
-      <div id="control_left" class="col s6 m6 l6">
-          <div id="joystick_left"></div>
-          <span>Joystick left</span>
-      </div>
-
-      <div id="control_right" class="col s6 m6 l6">
-          <div id="joystick_right"></div>
-          <span>Joystick right</span>
-      </div>
-      -->
-
-
-      <!--
-
-      <div class="col s12 m12 l12"> < ! - -  Note that "m8 l9" was added - - >
-        <div id="pn_velocidad"></div>
-        <div id="seekbar-container"></div>
-      </div>
-    -->
+  <div id="main">
+    <!--<img class="video_c" src="http://192.168.17.103:8080/stream.mjpg" ></img>-->
+    <div id="head_control" class="">
+      <div id="slider_aux_1"></div>
+      <div id="slider_on_off"></div>
+      <div id="slider_aux_2"></div>
     </div>
-    <!--Import jQuery before materialize.js -->
-    <script type="text/javascript" src="{{ static_url('bower_components/Materialize/dist/js/materialize.min.js') }}"></script>
-    <!--<script src="{{ static_url('cliente.js') }}" type="text/javascript"></script>
-      <script type="text/javascript" src="{{ static_url('nipplejs.min.js') }}"></script>
-      º-->
-      <script type="text/javascript" charset="UTF-8" src="{{ static_url('joydiv.js') }}"></script>
-      <script type="text/javascript">
 
-      /*
-        var joystick_left = nipplejs.create({
-
-          zone: document.getElementById('joystick_left'),
-          color: "red",
-          size: 200,
-          //threshold: Float,               // before triggering a directional event
-          //fadeTime: Integer,              // transition time
-          multitouch: true,
-          //maxNumberOfNipples: Number,     // when multitouch, what is too many?
-          //dataOnly: Boolean,              // no dom element whatsoever
-          position: { left: '20%', top: '50%' },               // preset position for 'static' mode
-          mode: "static",                   // 'dynamic', 'static' or 'semi'
-          //restOpacity: Number,            // opacity when not 'dynamic' and rested
-          //catchDistance: Number           // distance to recycle previous joystick in
-                                    // 'semi' mode
-        });
-
-
-
-        joystick_left.on('start end', function(evt, data) {
-
-        })
-        joystick_left.on('end', function(evt, data) {
-            console.log( "50" );
-        })
-        .on('move', function(evt, data) {
-          window.test = data;
-          window.evt = evt;
-
-          if ( typeof data.direction != 'undefined' ){
-            console.log( ( data.direction.y == 'up' ) ? 50 + ( data.distance / 2  ) : 50 - ( data.distance / 2 ) );
-          }
-          else{
-            console.log( "50" );
-
-          }
-            / *
-            console.log( data.position );
-            console.log( data.angle );
-* /
-        })
-        .on('dir:up plain:up dir:left plain:left dir:down plain:down dir:right plain:right', function(evt, data) {
-        })
-
-
-        .on('pressure', function(evt, data) {
-          console.log( data.distance );
-        });
-
-        // _________________________-----------
+    <div id="cv_control" class="">
+      <label class="radio radios_cv" for="radio1">
+        <input type="radio" name="option_radios_cv" value="1" id="radio1" data-toggle="radio" class="custom-radio">
+          <span class="icons">
+            <span class="icon-unchecked"></span>
+            <span class="icon-checked"></span>
+          </span>
+          GENTE
+      </label>
+      <label class="radio radios_cv" for="radio2">
+        <input type="radio" name="option_radios_cv" value="2" id="radio2" data-toggle="radio" checked="checked" class="custom-radio">
+        <span class="icons">
+          <span class="icon-unchecked"></span>
+          <span class="icon-checked"></span>
+        </span>
+        HUMO
+      </label>
+      <label class="radio radios_cv" for="radio3">
+        <input type="radio" name="option_radios_cv" value="3" id="radio3" data-toggle="radio" class="custom-radio">
+        <span class="icons">
+          <span class="icon-unchecked"></span>
+          <span class="icon-checked"></span>
+        </span>
+        FUEGO
+      </label>
+      <label class="radio radios_cv" for="radio4">
+        <input type="radio" name="option_radios_cv" value="4" id="radio4" data-toggle="radio" class="custom-radio">
+        <span class="icons">
+          <span class="icon-unchecked"></span>
+          <span class="icon-checked"></span>
+        </span>
+        BORDES
+      </label>
+      <label class="radio radios_cv" for="radio5">
+        <input type="radio" name="option_radios_cv" value="5" id="radio5" data-toggle="radio" class="custom-radio">
+        <span class="icons">
+          <span class="icon-unchecked"></span>
+          <span class="icon-checked"></span>
+        </span>
+        LINEAS RECTAS
+      </label>
+      <label class="radio radios_cv" for="radio6">
+        <input type="radio" name="option_radios_cv" value="6" id="radio6" data-toggle="radio" class="custom-radio">
+        <span class="icons">
+          <span class="icon-unchecked"></span>
+          <span class="icon-checked"></span>
+        </span>
+        COLORES
+      </label>
+    </div>
 
 
-        var joystick_right = nipplejs.create({
+    <div id="controller_joystick" class="active">
 
-          zone: document.getElementById('joystick_right'),
-          color: "green",
-          size: 200,
-          //threshold: Float,               // before triggering a directional event
-          //fadeTime: Integer,              // transition time
-          multitouch: true,
-          //maxNumberOfNipples: Number,     // when multitouch, what is too many?
-          //dataOnly: Boolean,              // no dom element whatsoever
-          position: { left: '80%', top: '50%' },               // preset position for 'static' mode
-          mode: "static",                   // 'dynamic', 'static' or 'semi'
-          //restOpacity: Number,            // opacity when not 'dynamic' and rested
-          //catchDistance: Number           // distance to recycle previous joystick in
-                                    // 'semi' mode
-        });
+      <div id="slider_throttle" style="height: 200px;"></div>
 
+      <div id='joystick_left' class="joydiv-joystick_left">
+          <div id="bg_joystick_left"></div>
+          <div class="joydiv-up"></div>
+          <div class="joydiv-left"></div>
+          <div class="joydiv-right"></div>
+          <div class="joydiv-down"></div>
+          <div class="joydiv-trackpad">
+              <div class="joydiv-tracker"></div>
+          </div>
+          <!--<label id='lbl_yaw' for="yaw">YAW</label>-->
+      </div>
 
-        */
-      </script>
+      <div id='joystick_right' class="joydiv-joystick_right">
+          <div id="bg_joystick_right"></div>
+          <div class="joydiv-up"></div>
+          <div class="joydiv-left"></div>
+          <div class="joydiv-right"></div>
+          <div class="joydiv-down"></div>
+          <div class="joydiv-trackpad">
+              <div class="joydiv-tracker"></div>
+          </div>
+          <!--
+          <label id='lbl_pitch' for="pitch">PITCH</label>
+          <label id='lbl_roll' for="roll">ROLL</label>
+          -->
+      </div>
 
-      <script type="text/javascript">
+      <input type="text" id="direction" readonly style="display:none;">
 
-            function send_post ( url , data ){
-              var xhr = new XMLHttpRequest();
-              xhr.withCredentials = true;
+    </div>
 
-              xhr.addEventListener( "readystatechange" , function () {
-                  if ( this.readyState === this.DONE ) {
-                      console.log( this.responseText );
-                  }
-              });
-
-
-              xhr.open( "POST", url );
-              xhr.send( data );
-            }
-
-            var element = document.getElementById('controller');
-            var joydiv = new JoydivModule.Joydiv( { 'element' : element } );
-
-            // conduccion
-
-            element.addEventListener( 'joydiv-changed' , function( e ) {
-                document.getElementById( 'direction' ).value = joydiv.getOneOf8Directions().name;
-
-                aux = joydiv.getOneOf8Directions() ;
-
-                switch( aux.name ){
-                  case 'up' :
-                    up_val =  ( 0 + ( 50 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
-                  break;
-                  case 'right' :
-                    right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
-                    var data = new FormData();
-                    data.append( "yaw" , right_val );
-                    send_post( "/control/action/yaw" , data );
-                  break;
-                  case 'down' :
-                    down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
-                  break;
-                  case 'left' :
-                    left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
-                    var data = new FormData();
-                    data.append( "yaw" , left_val );
-                    send_post( "/control/action/yaw" , data );
-                  break;
-                  case 'up-right' :
-                    up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up-right' , ( up_right_val <= 100 ) ? up_right_val : 100 );
-                  break;
-                  case 'down-right' :
-                    down_right_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down-right' , ( down_right_val >= 0 ) ? down_right_val : 0 );
-                  break;
-                  case 'down-left' :
-                    down_left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down-left' , ( down_left_val >= 0 ) ? down_left_val : 0 );
-                  break;
-                  case 'up-left' :
-                    up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
-                  break;
-                  case 'none' :
-                    var data = new FormData();
-                    data.append( "yaw" , 50 );
-                    send_post( "/control/action/yaw" , data );
-                    console.log( "______  none ----------" );
-                  break;
-                }
-
-
-            });
-
-            // mando
-
-            var element2 = document.getElementById('controller2');
-            var joydiv2 = new JoydivModule.Joydiv( { 'element' : element2 } );
-
-            element2.addEventListener( 'joydiv-changed' , function( e ) {
-                document.getElementById( 'direction' ).value = joydiv2.getOneOf8Directions().name;
-
-                aux = joydiv2.getOneOf8Directions();
-
-                switch( aux.name ){
-                  case 'up' :
-                    up_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
-                    var data = new FormData();
-                    data.append( "roll" , up_val );
-                    send_post( "/control/action/roll" , data )
-                  break;
-                  case 'right' :
-                    right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
-                    var data = new FormData();
-                    data.append( "pitch" , right_val );
-                    send_post( "/control/action/pitch" , data );
-                  break;
-                  case 'down' :
-                    down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
-                    var data = new FormData();
-                    data.append( "roll" , down_val );
-                    send_post( "/control/action/roll" , data );
-                  break;
-                  case 'left' :
-                    left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
-                    var data = new FormData();
-                    data.append( "pitch" , left_val );
-                    send_post( "/control/action/pitch" , data );
-                  break;
-
-                  case 'up-right' :
-                    up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up-right' , ( up_right_val <= 100 ) ? up_right_val : 100 );
-                  break;
-                  case 'down-right' :
-                    down_right_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down-right' , ( down_right_val >= 0 ) ? down_right_val : 0 );
-                  break;
-                  case 'down-left' :
-                    down_left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'down-left' , ( down_left_val >= 0 ) ? down_left_val : 0 );
-                  break;
-                  case 'up-left' :
-                    up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-                    console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
-                  break;
-
-                  case 'none' :
-                    var data = new FormData();
-                    data.append( "roll" , 50 );
-                    data.append( "pitch" , 50 );
-                    send_post( "/control/action/roll" , data );
-                    send_post( "/control/action/pitch" , data );
-                    console.log( "______  none ----------" );
-                  break;
-                }
-            });
-
-
-
-            /*
-            sen_post( "/control/action/aux_1" , data )
-            sen_post( "/control/action/aux_2" , data )
-            sen_post( "/control/action/interrumpir" , data )
-            sen_post( "/control/action/reiniciar" , data )
-            sen_post( "/control/action/resetear_valores" , data )
-            */
-
-
-            /*
-
-            var joydiv_l = document.getElementById('joydiv-l');
-
-            joydiv_l.addEventListener('click', function() {
-                setTimeout(function() {
-                    app.sendDataC("l");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("l");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("l");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("l");
-                }, 30);
-            }, false);
-
-
-            var joydiv_m = document.getElementById('joydiv-m');
-
-            joydiv_m.addEventListener('click', function() {
-                setTimeout(function() {
-                    app.sendDataC("m");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("m");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("m");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("m");
-                }, 30);
-            }, false);
-
-            var joydiv_n = document.getElementById('joydiv-n');
-
-            joydiv_n.addEventListener('click', function() {
-                setTimeout(function() {
-                    app.sendDataC("n");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("n");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("n");
-                }, 30);
-                setTimeout(function() {
-                    app.sendDataC("n");
-                }, 30);
-            }, false);
-            */
-
-
-             var blueSlider = new Seekbar.Seekbar({
-                renderTo: "#seekbar-container-vertical-blue",
-                minValue: 0, maxValue: 100,
-                barSize : 4,
-                needleSize : 0.2,
-                valueListener: function ( value ) {
-                    throttle_val = Math.round( value );
-                    this.value = throttle_val;
-                    var data = new FormData();
-                    data.append( "throttle" , throttle_val );
-                    send_post( "/control/action/throttle" , data );
-                    console.log( throttle_val );
-                },
-                thumbColor: '#cc006699', // ARGB is supported, Alpha, Red, Green and Blue
-                negativeColor: '#006699',
-                positiveColor: '#CCC',
-                value: 0
-            });
-
-            switch_on_off = document.querySelector( ".switch label input" );
-
-            switch_on_off.addEventListener( 'change' , function( evt ){
-                console.log( this.checked );
-
-                var data = new FormData();
-                data.append( "type" , "command" );
-                if ( this.checked == true )
-                    data.append( "value" , "on" );
-                else
-                    data.append( "value" , "off" );
-
-                var xhr = new XMLHttpRequest();
-                xhr.withCredentials = true;
-
-                xhr.addEventListener( "readystatechange" , function () {
-                    if ( this.readyState === this.DONE ) {
-                        console.log( this.responseText );
-                    }
-                });
-
-                xhr.open( "POST", "/control/action/on_off" );
-                xhr.send( data );
-
-            });
-
-
-
-        </script>
-
-
-    </body>
+  </div>
+  <!--<script src="{{ static_url('cliente.js') }}" type="text/javascript"></script>-->
+  <script type="text/javascript" src="{{ static_url('bower_components/flat-ui/dist/js/flat-ui.js') }}"></script>
+  <script type="text/javascript" charset="UTF-8" src="{{ static_url('joydiv.js') }}"></script>
+  <script type="text/javascript" charset="UTF-8" src="{{ static_url('js/scripts.js') }}"></script>
+</body>
 </html>
 

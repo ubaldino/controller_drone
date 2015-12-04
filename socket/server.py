@@ -24,14 +24,16 @@ import pprint
 from tornado.concurrent import Future
 from tornado import gen
 from tornado.options import define, options, parse_command_line
+from tornado_cors import CorsMixin
 
 define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-from ControlRemoto import ControlRemoto
+#from ControlRemoto import ControlRemoto
 
-control_remoto = ControlRemoto()
+#control_remoto = ControlRemoto()
+control_remoto = 2
 
 class MessageBuffer(object):
     def __init__(self):
@@ -82,12 +84,17 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 class control_action_all( tornado.web.RequestHandler ):
+    CORS_ORIGIN = '*'
+    CORS_HEADERS = 'Content-Type'
+    CORS_METHODS = 'POST'
+    CORS_CREDENTIALS = True
+    CORS_MAX_AGE = 21600
+    CORS_EXPOSE_HEADERS = 'Location, X-WP-TotalPages'
+
     def post( self ):
         #pprint.pprint( self.request.arguments , width=1 )
         pprint.pprint( self.get_argument( "vel" ) )
-
         vel = int( float( self.get_argument( "vel" ) ) )
-
         #serial_com.write( "v%d\n"%(vel) )
 
 class control_action_motor( tornado.web.RequestHandler ):
@@ -96,48 +103,71 @@ class control_action_motor( tornado.web.RequestHandler ):
         pprint.pprint( self.get_argument( "vel" ) )
         num_motor = self.get_argument( "num_motor" )
         vel = int( float( self.get_argument( "vel" ) ) )
-
-
         #serial_com.write( "v%d\n"%(vel) )
 
 class control_action_on_off( tornado.web.RequestHandler ):
+    CORS_ORIGIN = '*'
+    CORS_HEADERS = 'Content-Type'
+    CORS_METHODS = 'POST'
+    CORS_CREDENTIALS = True
+    CORS_MAX_AGE = 21600
+    CORS_EXPOSE_HEADERS = 'Location, X-WP-TotalPages'
+    """
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        self.set_header('Access-Control-Max-Age', 1000)
+        #self.set_header('Access-Control-Allow-Headers', 'origin, x-csrftoken, content-type, accept')
+        self.set_header('Access-Control-Allow-Headers', '*')
+        #self.set_header('Content-type', 'application/json')
+    """
     def post( self ):
-        if self.get_argument("value") == 'on':
+        pprint.pprint( self.request.arguments , width=1  )
+        if self.get_argument("value") == 1:
             print "reiniciar"
-            #control_remoto.reiniciar()
-        elif self.get_argument("value") == 'off':
+            control_remoto.reiniciar()
+        elif self.get_argument("value") == 2:
             print "apagar"
-            #control_remoto.interrumpir()
+            control_remoto.interrumpir()
 
 class control_action_roll( tornado.web.RequestHandler ):
     def post( self ):
-        pprint.pprint( int( self.get_argument( "roll" ) ) )
         control_remoto.setAleron( int( self.get_argument( "roll" ) ) )
+        #pprint.pprint( self.request.arguments , width=1  )
 
 class control_action_pitch( tornado.web.RequestHandler ):
     def post( self ):
         control_remoto.setElevador( int( self.get_argument( "pitch" ) ) )
+        #pprint.pprint( self.request.arguments , width=1  )
 class control_action_throttle( tornado.web.RequestHandler ):
     def post( self ):
         control_remoto.setAcelerador( int( self.get_argument( "throttle" ) ) )
+        #pprint.pprint( self.request.arguments , width=1  )
 class control_action_yaw( tornado.web.RequestHandler ):
     def post( self ):
         control_remoto.setTimon( int( self.get_argument( "yaw" ) ) )
+        #pprint.pprint( self.request.arguments , width=1 )
+
 class control_action_aux_1( tornado.web.RequestHandler ):
     def post( self ):
-        if self.get_argument("value") == 'on':
-            print "encender"
-        elif self.get_argument("value") == 'off':
-            print "apagar"
-            control_remoto.setAux1( 60 )
+        #pprint.pprint( self.request.arguments , width=1  )
+        if self.get_argument("value") == 1:
+            print "aux 1: encender"
+        elif self.get_argument("value") == 2:
+            print "aux 1: media"
+        elif self.get_argument("value") == 3:
+            print "aux 1: apagar"
+            #control_remoto.setAux1( 60 )
 
 class control_action_aux_2( tornado.web.RequestHandler ):
     def post( self ):
-        if self.get_argument("value") == 'on':
-            print "encender"
-        elif self.get_argument("value") == 'off':
-            print "apagar"
-            control_remoto.setAux2( 60 )
+        pprint.pprint( self.request.arguments , width=1  )
+        if self.get_argument("value") == 1:
+            print "aux 1: encender"
+        elif self.get_argument("value") == 2:
+            print "aux 1: media"
+        elif self.get_argument("value") == 3:
+            print "aux 1: apagar"
 
 class control_action_interrumpir( tornado.web.RequestHandler ):
     def post( self ):
@@ -145,7 +175,7 @@ class control_action_interrumpir( tornado.web.RequestHandler ):
             print "encender"
         elif self.get_argument("value") == 'off':
             print "apagar"
-            control_remoto.interrumpir()
+            #control_remoto.interrumpir()
 
 
 class control_action_reiniciar( tornado.web.RequestHandler ):
@@ -162,7 +192,7 @@ class control_action_resetear_valores( tornado.web.RequestHandler ):
             print "encender"
         elif self.get_argument("value") == 'off':
             print "apagar"
-            control_remoto.resetearValores()
+            #control_remoto.resetearValores()
 
 
 def main():
