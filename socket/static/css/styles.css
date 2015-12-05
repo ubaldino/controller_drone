@@ -190,7 +190,7 @@ a img {
 }
 #main #cv_control {
   position: absolute;
-  top: 4em;
+  top: 0em;
   right: 1em;
   width: 10em;
   z-index: 1;
@@ -225,7 +225,7 @@ a img {
 }
 #main #cv_control .radio .icon-checked::before {
   content: "";
-  font-size: 1.8em;
+  font-size: 1.1em;
 }
 @media only screen and (max-width: 767px) {
   #main #cv_control .radio .icon-checked::before {

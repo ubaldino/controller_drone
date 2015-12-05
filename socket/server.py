@@ -30,10 +30,10 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-from ControlRemoto import ControlRemoto
-control_remoto = ControlRemoto()
+#from ControlRemoto import ControlRemoto
+#control_remoto = ControlRemoto()
 
-#control_remoto = 2
+control_remoto = 2
 
 class MessageBuffer(object):
     def __init__(self):

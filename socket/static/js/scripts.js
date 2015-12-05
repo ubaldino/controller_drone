@@ -1,6 +1,6 @@
 
 
-var url_cv = "http://192.168.17.103:8081";
+var url_cv = "http://192.168.17.102:8081";
 
 function send_post ( url , data ){
   var xhr = new XMLHttpRequest();
@@ -263,7 +263,7 @@ function send_get( url_params ){
   var $slider_throttle = $( "#slider_throttle" );
 
 
-  if ( $slider_fly_mode.length > 0 && $slider_accessory_0.length > 0 && $slider_on_off.length > 0 ) {
+  if ( $slider_fly_mode.length > 0 ) {
     $slider_fly_mode.slider({
       min: 1,
       max: 3,
@@ -284,7 +284,7 @@ function send_get( url_params ){
         send_post( "/control/action/fly_mode" , data );
       }
     });//.addSliderSegments( $slider.slider("option").max );
-
+    /*
     $slider_on_off.slider({
       min: 1,
       max: 2,
@@ -304,8 +304,9 @@ function send_get( url_params ){
         send_post( "/control/action/on_off" , data );
       }
     });
+    */
 
-
+    /*
     $slider_accessory_0.slider({
       min: 1,
       max: 3,
@@ -328,6 +329,7 @@ function send_get( url_params ){
         send_post( "/control/action/accessory_0" , data );
       }
     });
+    */
 
     $slider_throttle.slider({
       min: 0,
@@ -351,10 +353,25 @@ function send_get( url_params ){
   $("input[name='option_radios_cv']").bind( 'change' , function( evt ){
       window.test = evt;
       console.log( test.target.value  );
-      /*var data = new FormData();
+      var data = new FormData();
       data.append( "CMD" ,  evt.target.value );
-      send_post ( 'http://192.168.17.102:8081' , data );
-      */
+      //send_post ( 'http://192.168.17.102:8081' , data );
 
-      //send_get( url_cv + "/?cmd=" + evt.target.value );
+      send_get( url_cv + "/?cmd=" + evt.target.value );
+  });
+
+  $("input[id='switch-02']").bootstrapSwitch();
+
+
+  $("input[id='switch-02']").on('switchChange.bootstrapSwitch', function(event, state) {
+
+    var data = new FormData();
+    data.append( "type" , "command" );
+    if ( state == false )
+        data.append( "value" , 0 );
+    else if ( state == true )
+        data.append( "value" , 100 );
+
+    send_post( "/control/action/accessory_0" , data );
+
   });
