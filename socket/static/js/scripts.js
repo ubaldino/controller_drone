@@ -35,28 +35,32 @@ function send_get( url_params ){
       aux = joydiv.getOneOf8Directions() ;
 
       switch( aux.name ){
-        case 'up' :
+        /*case 'up' :
           up_val =  ( 0 + ( 50 * aux.magnitude ) ).toFixed( 0 ) ;
           console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
         break;
+        */
         case 'right' :
           right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
+          //console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
           var data = new FormData();
-          data.append( "yaw" , right_val );
+          data.append( "yaw" , ( right_val <= 100 ) ? right_val : 100 );
           send_post( "/control/action/yaw" , data );
         break;
+        /*
         case 'down' :
           down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
           console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
         break;
+        */
         case 'left' :
           left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
+          //console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
           var data = new FormData();
-          data.append( "yaw" , left_val );
+          data.append( "yaw" , ( left_val >= 0 ) ? left_val : 0 );
           send_post( "/control/action/yaw" , data );
         break;
+        /*
         case 'up-right' :
           up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
           console.log( 'up-right' , ( up_right_val <= 100 ) ? up_right_val : 100 );
@@ -73,6 +77,7 @@ function send_get( url_params ){
           up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
           console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
         break;
+        */
         case 'none' :
           var data = new FormData();
           data.append( "yaw" , 50 );
@@ -97,49 +102,51 @@ function send_get( url_params ){
       switch( aux.name ){
         case 'up' :
           up_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
+          //console.log( 'up' , ( up_val <= 100 ) ? up_val : 100 );
           var data = new FormData();
-          data.append( "pitch" , up_val );
+          data.append( "pitch" , ( up_val <= 100 ) ? up_val : 100 );
           send_post( "/control/action/pitch" , data )
         break;
         case 'right' :
           right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
+          //console.log( 'right' , ( right_val <= 100 ) ? right_val : 100 );
           var data = new FormData();
-          data.append( "roll" , right_val );
+          data.append( "roll" , ( right_val <= 100 ) ? right_val : 100  );
           send_post( "/control/action/roll" , data );
         break;
         case 'down' :
           down_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
+          //console.log( 'down' , ( down_val >= 0 ) ? down_val : 0 );
           var data = new FormData();
-          data.append( "pitch" , down_val );
+          data.append( "pitch" , ( down_val >= 0 ) ? down_val : 0 );
           send_post( "/control/action/pitch" , data );
         break;
         case 'left' :
           left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
+          //console.log( 'left' , ( left_val >= 0 ) ? left_val : 0 );
           var data = new FormData();
-          data.append( "roll" , left_val );
+          data.append( "roll" , ( left_val >= 0 ) ? left_val : 0 );
           send_post( "/control/action/roll" , data );
         break;
 
+        /*
         case 'up-right' :
           up_right_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
           console.log( 'up-right' , ( up_right_val <= 100 ) ? up_right_val : 100 );
         break;
         case 'down-right' :
-          down_right_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'down-right' , ( down_right_val >= 0 ) ? down_right_val : 0 );
+          //down_right_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
+          //console.log( 'down-right' , ( down_right_val >= 0 ) ? down_right_val : 0 );
         break;
         case 'down-left' :
-          down_left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'down-left' , ( down_left_val >= 0 ) ? down_left_val : 0 );
+          //down_left_val = ( 50 - ( 33.3 * aux.magnitude ) ).toFixed( 0 ) ;
+          //console.log( 'down-left' , ( down_left_val >= 0 ) ? down_left_val : 0 );
         break;
         case 'up-left' :
-          up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
-          console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
+          //up_left_val =  ( 50 + ( 32 * aux.magnitude ) ).toFixed( 0 ) ;
+          //console.log( 'up-left' , ( up_left_val <= 100 ) ? up_left_val : 100 );
         break;
+        */
 
         case 'none' :
           var data = new FormData();
@@ -250,14 +257,14 @@ function send_get( url_params ){
     });
   };
 
-  var $slider_aux_1  = $( "#slider_aux_1" );
-  var $slider_aux_2  = $( "#slider_aux_2" );
+  var $slider_fly_mode  = $( "#slider_aux_1" );
+  var $slider_accessory_0  = $( "#slider_aux_2" );
   var $slider_on_off = $( "#slider_on_off" );
   var $slider_throttle = $( "#slider_throttle" );
 
 
-  if ( $slider_aux_1.length > 0 && $slider_aux_2.length > 0 && $slider_on_off.length > 0 ) {
-    $slider_aux_1.slider({
+  if ( $slider_fly_mode.length > 0 && $slider_accessory_0.length > 0 && $slider_on_off.length > 0 ) {
+    $slider_fly_mode.slider({
       min: 1,
       max: 3,
       value: 2,
@@ -274,7 +281,7 @@ function send_get( url_params ){
         else if ( ui.value == 3 )
             data.append( "value" , 100 );
 
-        send_post( "/control/action/aux_1" , data );
+        send_post( "/control/action/fly_mode" , data );
       }
     });//.addSliderSegments( $slider.slider("option").max );
 
@@ -299,7 +306,7 @@ function send_get( url_params ){
     });
 
 
-    $slider_aux_2.slider({
+    $slider_accessory_0.slider({
       min: 1,
       max: 3,
       value: 2,
@@ -318,7 +325,7 @@ function send_get( url_params ){
         else if ( ui.value == 3 )
             data.append( "value" , 100 );
 
-        send_post( "/control/action/aux_2" , data );
+        send_post( "/control/action/accessory_0" , data );
       }
     });
 

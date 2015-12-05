@@ -30,10 +30,10 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-#from ControlRemoto import ControlRemoto
+from ControlRemoto import ControlRemoto
+control_remoto = ControlRemoto()
 
-#control_remoto = ControlRemoto()
-control_remoto = 2
+#control_remoto = 2
 
 class MessageBuffer(object):
     def __init__(self):
@@ -132,42 +132,28 @@ class control_action_on_off( tornado.web.RequestHandler ):
 
 class control_action_roll( tornado.web.RequestHandler ):
     def post( self ):
+        #print int( self.get_argument( 'roll' ) )
         control_remoto.setAleron( int( self.get_argument( "roll" ) ) )
-        #pprint.pprint( self.request.arguments , width=1  )
-
 class control_action_pitch( tornado.web.RequestHandler ):
     def post( self ):
+        #print int( self.get_argument( 'pitch' ) )
         control_remoto.setElevador( int( self.get_argument( "pitch" ) ) )
-        #pprint.pprint( self.request.arguments , width=1  )
 class control_action_throttle( tornado.web.RequestHandler ):
     def post( self ):
+        #print int( self.get_argument( 'throttle' ) )
         control_remoto.setAcelerador( int( self.get_argument( "throttle" ) ) )
-        #pprint.pprint( self.request.arguments , width=1  )
 class control_action_yaw( tornado.web.RequestHandler ):
     def post( self ):
+        #print int( self.get_argument( 'yaw' ) )
         control_remoto.setTimon( int( self.get_argument( "yaw" ) ) )
-        #pprint.pprint( self.request.arguments , width=1 )
-
-class control_action_aux_1( tornado.web.RequestHandler ):
+class control_action_fly_mode( tornado.web.RequestHandler ):
     def post( self ):
-        #pprint.pprint( self.request.arguments , width=1  )
-        if self.get_argument("value") == 1:
-            print "aux 1: encender"
-        elif self.get_argument("value") == 2:
-            print "aux 1: media"
-        elif self.get_argument("value") == 3:
-            print "aux 1: apagar"
-            #control_remoto.setAux1( 60 )
-
-class control_action_aux_2( tornado.web.RequestHandler ):
+        #print int( self.get_argument( 'value' ) )
+        control_remoto.setAux1( int( self.get_argument( 'value' ) ) )
+class control_action_accessory_0( tornado.web.RequestHandler ):
     def post( self ):
-        pprint.pprint( self.request.arguments , width=1  )
-        if self.get_argument("value") == 1:
-            print "aux 1: encender"
-        elif self.get_argument("value") == 2:
-            print "aux 1: media"
-        elif self.get_argument("value") == 3:
-            print "aux 1: apagar"
+        #print int( self.get_argument( 'value' ) )
+        control_remoto.setAux2( int( self.get_argument( 'value' ) ) )
 
 class control_action_interrumpir( tornado.web.RequestHandler ):
     def post( self ):
@@ -208,8 +194,8 @@ def main():
             (r"/control/action/throttle" , control_action_throttle ),
             (r"/control/action/yaw" , control_action_yaw ),
 
-            (r"/control/action/aux_1" , control_action_aux_1 ),
-            (r"/control/action/aux_2" , control_action_aux_2 ),
+            (r"/control/action/fly_mode" , control_action_fly_mode ),
+            (r"/control/action/accessory_0" , control_action_accessory_0 ),
 
             (r"/control/action/interrumpir" , control_action_interrumpir ),
             (r"/control/action/reiniciar" , control_action_reiniciar ),
