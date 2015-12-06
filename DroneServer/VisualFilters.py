@@ -14,8 +14,12 @@ RESALTAR_BLANCO         = 9
 DETECTAR_MOVIMIENTO     = 10
 RESALTAR_COLORES_FUEGO  = 11
 
-mog = cv2.BackgroundSubtractorMOG(history=3, nmixtures=5, backgroundRatio=0.0001)
+PARAMETRO_ROJO      = 0
+PARAMETRO_AZUL      = 1
+PARAMETRO_VERDE     = 3
+PARAMETRO_BLANCO    = 4
 
+mog = cv2.BackgroundSubtractorMOG(history=3, nmixtures=5, backgroundRatio=0.9)
 
 #funcion que intensifica los colores en un rango(min y max)
 #rango minino de los tres canales HSV: hMin,sMin,vMin
@@ -39,6 +43,28 @@ def aumentarIntensidadPorRangoDeColor(frame,hMin,hMax,sMin,sMax,vMin,vMax):
   #addWeighted(img1,opacidad1,img2,opacidad2)
   salida=cv2.addWeighted(frame,0.7,res,0.3,0)
   return salida
+
+
+def encontrarBordesCanny(imagen):
+
+        #src: matriz de entrada(1->CANAL de 8 bits) imagen de origen que debe ser una imagen de escala de grises
+        #thresh: valor umbral se utiliza para clasificar los valores de pixel
+        #maxval: valor maximo de umbral
+        #type: tipo de umbral
+        edges = cv2.Canny(imagen,127,255)
+
+        #encuentra los contornos en una imagen binaria
+        #imagen: imagen umbral
+        #almacenamiento: cv2.RETR_TREE
+        #metodo: CV_CHAIN_APPROX_SIMPLE
+        #offsert = (0,0)-> contornos
+
+        contornos, jerarquia = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+
+        #dibujas los contornos de la imagen
+        cv2.drawContours(imagen,contornos,-1,(0,255,128),1)
+
+        return imagen
 
 #Funcion que encuentra los contornos de una imagen
 #imagen:jpg|png
@@ -95,26 +121,79 @@ def marcarRectas(img) :
 
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-    flag,b = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
+    flag,b = cv2.threshold(gray,100,255,cv2.THRESH_BINARY)
 
-    element = cv2.getStructuringElement(cv2.MORPH_CROSS,(1,1))
-    #cv2.erode(b,element)
+    element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(7,7))
+    cv2.dilate(b,element)
 
-    edges = cv2.Canny(b,127,255)
+    edges = cv2.Canny(b,100,255)
 
-    lines = cv2.HoughLinesP(edges,1, np.pi/180, 100)
+    lines90 = cv2.HoughLinesP(edges,1, np.pi/180, 100)
+    lines180 = cv2.HoughLinesP(edges,1, np.pi, 100)
 
-    if(lines!=None):
-        l = lines.tolist()
+    if(lines90!=None):
+        l = lines90.tolist()
+        for x1,y1,x2,y2 in l[0]:
+            cv2.line(img, (x1,y1), (x2,y2), (0,255,0), 5)
+
+    if(lines180!=None):
+        l = lines180.tolist()
         for x1,y1,x2,y2 in l[0]:
             cv2.line(img, (x1,y1), (x2,y2), (0,255,0), 3)
-        img = cv2.cvtColor(edges,cv2.COLOR_GRAY2BGR)
-    return img
-
-
-def resaltarColor(img, color):
-
 
     return img
+
+
+def resalteColor(img1,color):
+    hsv = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
+    alto, ancho = hsv.shape[:2]
+    img2=np.zeros([alto,ancho,3],dtype=np.uint8)
+
+    # El programa detectara los colores dentro de estos rangos.
+    if color == PARAMETRO_ROJO:
+       # rojo
+       bajos = np.array([0,50,50],dtype=np.uint8)
+       altos = np.array([10,255,255],dtype=np.uint8)
+       img2[:,:,:]=0,0,255 #rojo intenso en BGR
+
+    elif color == PARAMETRO_AZUL:
+        # azul - verde
+        bajos = np.array([100,50,50], dtype=np.uint8)
+        altos = np.array([130,255,255], dtype=np.uint8)
+        img2[:,:,:]=0,0,255 #azul intenso en BGR
+
+    elif color == PARAMETRO_VERDE:
+        # azul
+        bajos = np.array([45,  50, 50],dtype=np.uint8)
+        altos = np.array([90, 255,255],dtype=np.uint8)
+        img2[:,:,:]=255,0,255 # verde intenso en BGR
+
+    else: # amarillo - blanco
+        bajos = np.array([0,   0,200],dtype=np.uint8)
+        altos = np.array([180,64,255],dtype=np.uint8)
+        img2[:,:,:]=0,255,0 #amarillo intenso en BGR
+
+    # Vamos a ver que pixeles estan en el rango. La (mascara sera blanco y negro)
+    mask = cv2.inRange(hsv, bajos, altos)
+
+    # Filtramos el ruido con un close seguido de un opening.Esto eliminara las zonas blancas de la mascara
+    # mas pequenias y dejara las mas grandes, que se supone que seran objetos.
+    #Filtrar el ruido con un CLOSE/OPEN
+    #kernel = np.ones((6,6),np.uint8)
+    #mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    #mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+
+    #Difuminar la mascara para suavizar los contornos y aplicar filtro canny
+    #mask = cv2.GaussianBlur(mask, (5, 5), 0)
+    #mask = cv2.Canny(mask,1,2)
+
+
+    # Bitwise-AND mask and original image
+    img2=cv2.cvtColor(img2,cv2.COLOR_BGR2HSV)
+    img2_fg = cv2.bitwise_and(img2,img2,mask = mask)
+    dst = cv2.add(hsv,img2_fg)
+    dst = cv2.cvtColor(dst,cv2.COLOR_HSV2BGR)
+    return dst
+
 
 
