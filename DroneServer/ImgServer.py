@@ -16,9 +16,7 @@ import Reconocedor_Fuego_Humo
 from PIL import Image
 
 capture=None
-
 mode = 0
-
 
 class CommandHandler(BaseHTTPRequestHandler):
 
@@ -65,16 +63,33 @@ class CamHandler(BaseHTTPRequestHandler):
 						continue
 					if mode == VisualFilters.RESALTAR_COLORES_FUEGO :
 						img = VisualFilters.aumentarIntensidadPorRangoDeColor(img, 0, 18, 105, 255, 183, 255)
+
 					if mode == VisualFilters.RESALTAR_BORDES:
-						img = VisualFilters.encontrarBordes(img)
+						img = VisualFilters.encontrarBordesCanny(img)
+
 					if mode == VisualFilters.DETECTAR_MOVIMIENTO:
 						img = VisualFilters.detectarMovimiento(img)
+
 					if mode == VisualFilters.RESALTAR_LINEAS_RECTAS:
 						img = VisualFilters.marcarRectas(img)
+
 					if mode == VisualFilters.RESALTAR_HUMO:
 						img, porc = Reconocedor_Fuego_Humo.detectar_humo(img)
+
 					if mode == VisualFilters.RESALTAR_FUEGO:
 						img, porc = Reconocedor_Fuego_Humo.detectar_fuego(img)
+
+					if mode == VisualFilters.RESALTAR_AZUL:
+						img = VisualFilters.resalteColor(img, VisualFilters.PARAMETRO_AZUL)
+
+					if mode == VisualFilters.RESALTAR_ROJO:
+						img = VisualFilters.resalteColor(img, VisualFilters.PARAMETRO_ROJO)
+
+					if mode == VisualFilters.RESALTAR_VERDE:
+						img = VisualFilters.resalteColor(img, VisualFilters.PARAMETRO_VERDE)
+
+					if mode == VisualFilters.RESALTAR_BLANCO:
+						img = VisualFilters.resalteColor(img, VisualFilters.PARAMETRO_BLANCO)
 
 					imgRGB=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 					jpg = Image.fromarray(imgRGB)
@@ -107,6 +122,7 @@ class CommandThread ( threading.Thread ):
 		print "command server started"
 		server.serve_forever()
 
+
 def main():
 	global capture
 	capture = cv2.VideoCapture(0)
@@ -117,6 +133,7 @@ def main():
 	try:
 		cmdserver = CommandThread()
 		cmdserver.start()
+
 		server = HTTPServer(('',8080),CamHandler)
 		print "streaming server started"
 		server.serve_forever()

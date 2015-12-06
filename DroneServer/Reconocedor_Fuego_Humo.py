@@ -13,7 +13,7 @@ max_fuego = -20.0
 
 def detectar_fuego(imagen):
     if imagen!= None:
-        imagen = cv2.resize(imagen,(640,480))
+        #imagen = cv2.resize(imagen,(640,480))
         reconocedor = cargar_entrenamiento_fuego(imagen)
         #con la lista dibuja los rectangulos en la imagen
         imagen_reconocida = dibujar(imagen,[reconocedor],[1])
@@ -24,7 +24,7 @@ def detectar_fuego(imagen):
 
 def detectar_humo(imagen):
     if imagen != None:
-        imagen = cv2.resize(imagen,(640,480))
+        #imagen = cv2.resize(imagen,(640,480))
         reconocedor = reconocer_humo(imagen)
         #con la lista de reconocimientos dibuja en la imagen
         imagen_reconocida = dibujar(imagen,[reconocedor],[0])
@@ -35,7 +35,7 @@ def detectar_humo(imagen):
 
 def detectar_fuego_humo(imagen):
     if imagen != None:
-        imagen = cv2.resize(imagen,(640,480))
+        #imagen = cv2.resize(imagen,(640,480))
         #obtiene una lista de los tres tipos de fuego reconocidos [fuego,humo_blanco,humo_negro]
         reconocedores = reconocer(imagen)
         #con la lista dibuja los rectangulos en la imagen
