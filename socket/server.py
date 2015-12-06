@@ -18,6 +18,7 @@ import logging
 import tornado.escape
 import tornado.ioloop
 import tornado.web
+import tornado.websocket
 import os.path
 import uuid
 import pprint
@@ -30,10 +31,20 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-#ºfrom ControlRemoto import ControlRemoto
+#from ControlRemoto import ControlRemoto
 #control_remoto = ControlRemoto()
 
 control_remoto = 2
+
+class EchoWebSocket( tornado.websocket.WebSocketHandler ):
+    def open( self ):
+        print( "WebSocket opened" )
+    def on_message( self, message ):
+        print message
+        #self.write_message( u"You said: " + message )
+    def on_close(self):
+        print( "WebSocket closed" )
+
 
 class MessageBuffer(object):
     def __init__(self):
@@ -194,7 +205,10 @@ def main():
 
             (r"/control/action/interrumpir" , control_action_interrumpir ),
             (r"/control/action/reiniciar" , control_action_reiniciar ),
-            (r"/control/action/resetear_valores" , control_action_resetear_valores )
+            (r"/control/action/resetear_valores" , control_action_resetear_valores ),
+            (r"/websocket" , EchoWebSocket )
+
+
 
         ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",

@@ -287,6 +287,7 @@ a img {
   margin-right: 3%;
   width: 1.6em;
   left: 0.8em;
+  min-height: 400px;
 }
 #main #controller_joystick #slider_throttle:before,
 #main #controller_joystick #slider_throttle:after {
@@ -318,10 +319,11 @@ a img {
   margin-left: 0%;
   margin-right: 3%;
   position: absolute;
-  bottom: 35%;
+  background: #d13f19;
+  bottom: 25%;
   left: 15%;
-  width: 150px;
-  height: 150px;
+  width: 1.5em;
+  height: 1.5em;
   font-size: 150px;
 }
 #main #controller_joystick #joystick_left:before,
@@ -364,9 +366,9 @@ a img {
   opacity: 0.3;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
   filter: alpha(opacity=30);
-  padding: 0.96em;
-  bottom: 48%;
-  left: -45%;
+  padding: 1.25em;
+  bottom: 34%;
+  left: -33%;
   -webkit-border-radius: 50em;
   border-radius: 50em;
   border: solid 1px #000;
@@ -486,11 +488,12 @@ a img {
   margin-left: 0%;
   margin-right: 3%;
   position: absolute;
-  bottom: 35%;
+  bottom: 25%;
   right: 15%;
   color: #eb012c;
-  width: 150px;
-  height: 150px;
+  width: 1.5em;
+  height: 1.5em;
+  background: #ffdc00;
   font-size: 150px;
 }
 #main #controller_joystick #joystick_right:before,
@@ -527,9 +530,9 @@ a img {
   opacity: 0.3;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
   filter: alpha(opacity=30);
-  padding: 0.96em;
-  bottom: 47%;
-  left: -46%;
+  padding: 1.25em;
+  bottom: 34%;
+  left: -33%;
   -webkit-border-radius: 50em;
   border-radius: 50em;
   border: solid 1px #000;
