@@ -46,17 +46,19 @@
       <div id="slider_aux_1"></div>
 
       <!-- Square switch -->
-      <div class="bootstrap-switch-square">
+      <!--
+      <div id='switch_on_off' class="bootstrap-switch-square">
         <input type="checkbox" checked data-toggle="switch" name="square-switch" id="switch-02" />
       </div>
+      -->
 
-      <!--<div id="slider_on_off"></div>
-      <div id="slider_aux_2"></div>-->
+      <div id="slider_on_off"></div>
+      <!--<div id="slider_aux_2"></div>-->
     </div>
-
-    <div id="cv_control" class="">
+    <button id="btn_cv_control" class="btn btn-inverse">CV CONTROL</button>
+    <div id="cv_control" style="display: none;">
       <label class="radio radios_cv" for="radio0">
-        <input type="radio" name="option_radios_cv" value="0" id="radio0" data-toggle="radio" class="custom-radio">
+        <input type="radio" name="option_radios_cv" value="0" id="radio0" data-toggle="radio" checked="checked" class="custom-radio">
           <span class="icons">
             <span class="icon-unchecked"></span>
             <span class="icon-checked"></span>
@@ -72,7 +74,7 @@
           GENTE
       </label>
       <label class="radio radios_cv" for="radio2">
-        <input type="radio" name="option_radios_cv" value="2" id="radio2" data-toggle="radio" checked="checked" class="custom-radio">
+        <input type="radio" name="option_radios_cv" value="2" id="radio2" data-toggle="radio" class="custom-radio">
         <span class="icons">
           <span class="icon-unchecked"></span>
           <span class="icon-checked"></span>

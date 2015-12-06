@@ -30,7 +30,7 @@ define("port", default=7777, help="run on the given port", type=int)
 define("debug", default=False, help="run in debug mode")
 print "server in  port: 7777"
 
-#from ControlRemoto import ControlRemoto
+#ºfrom ControlRemoto import ControlRemoto
 #control_remoto = ControlRemoto()
 
 control_remoto = 2
@@ -106,13 +106,13 @@ class control_action_motor( tornado.web.RequestHandler ):
         #serial_com.write( "v%d\n"%(vel) )
 
 class control_action_on_off( tornado.web.RequestHandler ):
+    """
     CORS_ORIGIN = '*'
     CORS_HEADERS = 'Content-Type'
     CORS_METHODS = 'POST'
     CORS_CREDENTIALS = True
     CORS_MAX_AGE = 21600
     CORS_EXPOSE_HEADERS = 'Location, X-WP-TotalPages'
-    """
     def set_default_headers(self):
         self.set_header('Access-Control-Allow-Origin', '*')
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
@@ -123,12 +123,7 @@ class control_action_on_off( tornado.web.RequestHandler ):
     """
     def post( self ):
         pprint.pprint( self.request.arguments , width=1  )
-        if self.get_argument("value") == 1:
-            print "reiniciar"
-            control_remoto.reiniciar()
-        elif self.get_argument("value") == 2:
-            print "apagar"
-            control_remoto.interrumpir()
+        control_remoto.setAux2( int( self.get_argument( 'value' ) ) )
 
 class control_action_roll( tornado.web.RequestHandler ):
     def post( self ):

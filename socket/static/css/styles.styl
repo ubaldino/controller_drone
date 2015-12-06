@@ -37,8 +37,11 @@ $cvioleta = rgba(112, 40, 97, 1)
         top 1em
         #slider_aux_1
             col( 3/12 , cycle: 3)
+            top: 0.7em;
         #slider_on_off
             col( 2/12 , offset: 2/12 , cycle: 3)
+            top: 0.7em;
+            width: 7%
         #slider_aux_2
             col( 3/12, cycle: 3)
         .ui-slider-handle
@@ -46,12 +49,18 @@ $cvioleta = rgba(112, 40, 97, 1)
             height 35px
             top -12px
             background $cvioleta
+    #btn_cv_control
+        position: absolute;
+        right: 0px;
+        top: 0px;
     #cv_control
         position: absolute;
         top: 0em;
-        right: 1em;
         width: 10em;
         z-index: 1;
+        background: $cgoogle
+        padding: 0 0 0 1em;
+        right: 0px;
         +below( 767px )
             right: 0em;
             width: 8em;
@@ -60,7 +69,7 @@ $cvioleta = rgba(112, 40, 97, 1)
             width 8em
         label.radios_cv
             display block
-            margin-bottom 1.6em
+            margin-bottom 0.6em
             +below( 767px )
                 margin-bottom 0em
                 font-size 0.7em
@@ -74,7 +83,7 @@ $cvioleta = rgba(112, 40, 97, 1)
                 font-size: 1.2em
         .radio .icon-unchecked::before
             content: "";
-            font-size: 1.8em;
+            font-size: 1.1em;
             +below( 767px )
                 font-size: 1.2em
         .checkbox .icons, .radio .icons

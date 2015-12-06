@@ -118,6 +118,7 @@ a img {
   width: 22.75%;
   margin-left: 0%;
   margin-right: 3%;
+  top: 0.7em;
 }
 #main #head_control #slider_aux_1:before,
 #main #head_control #slider_aux_1:after {
@@ -142,6 +143,8 @@ a img {
   width: 14.166666666666664%;
   margin-left: 17.166666666666664%;
   margin-right: 3%;
+  top: 0.7em;
+  width: 7%;
 }
 #main #head_control #slider_on_off:before,
 #main #head_control #slider_on_off:after {
@@ -188,12 +191,19 @@ a img {
   top: -12px;
   background: #702861;
 }
+#main #btn_cv_control {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
 #main #cv_control {
   position: absolute;
   top: 0em;
-  right: 1em;
   width: 10em;
   z-index: 1;
+  background: #df5c56;
+  padding: 0 0 0 1em;
+  right: 0px;
 }
 @media only screen and (max-width: 767px) {
   #main #cv_control {
@@ -209,7 +219,7 @@ a img {
 }
 #main #cv_control label.radios_cv {
   display: block;
-  margin-bottom: 1.6em;
+  margin-bottom: 0.6em;
 }
 @media only screen and (max-width: 767px) {
   #main #cv_control label.radios_cv {
@@ -234,7 +244,7 @@ a img {
 }
 #main #cv_control .radio .icon-unchecked::before {
   content: "";
-  font-size: 1.8em;
+  font-size: 1.1em;
 }
 @media only screen and (max-width: 767px) {
   #main #cv_control .radio .icon-unchecked::before {

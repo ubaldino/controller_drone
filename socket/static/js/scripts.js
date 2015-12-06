@@ -263,7 +263,7 @@ function send_get( url_params ){
   var $slider_throttle = $( "#slider_throttle" );
 
 
-  if ( $slider_fly_mode.length > 0 ) {
+  if ( $slider_fly_mode.length > 0 && $slider_on_off.length > 0 ) {
     $slider_fly_mode.slider({
       min: 1,
       max: 3,
@@ -284,7 +284,7 @@ function send_get( url_params ){
         send_post( "/control/action/fly_mode" , data );
       }
     });//.addSliderSegments( $slider.slider("option").max );
-    /*
+
     $slider_on_off.slider({
       min: 1,
       max: 2,
@@ -292,19 +292,15 @@ function send_get( url_params ){
       orientation: "horizontal",
       range: "min",
       slide: function( event , ui ) {
-
-        console.log( ui.value );
-
         var data = new FormData();
         data.append( "type" , "command" );
         if ( ui.value == 2 )
-            data.append( "value" , "on" );
+            data.append( "value" , 100 );
         else
-            data.append( "value" , "off" );
+            data.append( "value" , 0 );
         send_post( "/control/action/on_off" , data );
       }
     });
-    */
 
     /*
     $slider_accessory_0.slider({
@@ -343,7 +339,8 @@ function send_get( url_params ){
           var data = new FormData();
           data.append( "throttle" , throttle_val );
           send_post( "/control/action/throttle" , data );
-          console.log( throttle_val );
+          document.querySelector( "#slider_throttle .ui-slider-handle" ).innerText = throttle_val;
+          //event.target
       }
     })
 
@@ -357,8 +354,12 @@ function send_get( url_params ){
       data.append( "CMD" ,  evt.target.value );
       //send_post ( 'http://192.168.17.102:8081' , data );
 
+      document.getElementById( "cv_control" ).style.display = "none";
+      document.getElementById( "btn_cv_control" ).style.display = "block"
       send_get( url_cv + "/?cmd=" + evt.target.value );
   });
+
+  /*
 
   $("input[id='switch-02']").bootstrapSwitch();
 
@@ -374,4 +375,10 @@ function send_get( url_params ){
 
     send_post( "/control/action/accessory_0" , data );
 
+  });
+*/
+
+  document.getElementById( "btn_cv_control" ).addEventListener( 'click' , function(){
+    document.getElementById( "cv_control" ).style.display = "block";
+    document.getElementById( "btn_cv_control" ).style.display = "none"
   });
